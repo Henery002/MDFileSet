@@ -1,5 +1,5 @@
 ## React 入门实例教程
-> 参考：https://doc.react-china.org/docs/hello-world.html 、http://www.ruanyifeng.com/blog/2015/03/react
+> 参考：https://doc.react-china.org/docs/hello-world.html 、http://www.ruanyifeng.com/blog/2015/03/react <br/>
 > 时间：2017/12/25
 
 ## 第一篇
