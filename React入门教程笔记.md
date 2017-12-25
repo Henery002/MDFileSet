@@ -18,6 +18,21 @@
 - ### 事件处理
 
 - ### 条件渲染
+> 在 React 中，你可以创建不同的组件来封装各种你需要的行为。然后还可以根据应用的状态变化只渲染其中的一部分。
+React 中的条件渲染和 JavaScript 中的一致，使用 JavaScript 操作符 if 或条件运算符来创建表示当前状态的元素，然后让 React 根据它们来更新 UI。
+``` javascript
+function UserGreeting(props) {
+  return <h1>Welcome back!</h1>;
+}
+function GuestGreeting(props) {
+  return <h1>Please sign up.</h1>;
+}
+```
+我们将创建一个 Greeting 组件，它会根据用户是否登录来显示其中之一：
+
+此示例根据 isLoggedIn 的值渲染不同的问候语。
+
+
 
 - ### 列表 & Keys
 
