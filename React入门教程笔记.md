@@ -71,11 +71,11 @@ React.createElement(
 ```
 使用[在线 Babel 编译器](https://babeljs.io/repl/#?babili=false&evaluate=true&lineWrap=false&presets=es2015%2Creact%2Cstage-0&code=function%20hello()%20%7B%0A%20%20return%20%3Cdiv%3EHello%20world!%3C%2Fdiv%3E%3B%0A%7D)验证 JSX 是如何转换为 JavaScript 的。
 
------------
-#### 指定React元素类型
+----
+### 指定React元素类型
 JSX 的标签名决定了 React 元素的类型。
 大写开头的 JSX 标签表示一个 React 组件。这些标签将会被编译为同名变量并被引用，所以如果你使用了 <Foo /> 表达式，则必须在作用域中先声明 Foo 变量。 
-##### React必须声明
+#### React必须声明
 由于 JSX 编译后会调用 React.createElement 方法，所以在你的 JSX 代码中必须首先声明 React 变量。<br/>
 比如，下面两个导入都是必须的，尽管 React 和 CustomButton 都没有在代码中被直接调用。
 ```javascript
@@ -88,7 +88,7 @@ function WarningButton() {
 ```
 如果你使用script标签加载 React，它将作用于全局。
 
-##### 点表示法
+#### 点表示法
 还可以使用 JSX 中的点表示法来引用 React 组件。你可以方便地从一个模块中导出许多 React 组件。例如，有一个名为 MyComponents.DataPicker 的组件，你可以直接在 JSX 中使用它：
 ```javascript
 import React from 'react';
@@ -104,7 +104,7 @@ function BlueDatePicker() {
 }
 ```
 
-##### 首字母大写
+#### 首字母大写
 当元素类型以小写字母开头时，它表示一个内置的组件，如 <div> 或 <span>，并将字符串 ‘div’ 或 ‘span’ 传 递给 React.createElement。 以大写字母开头的类型，如 <Foo /> 编译为 React.createElement(Foo)，并它正对应于你在 JavaScript 文件中定义或导入的组件。<br/>
 我们建议用大写开头命名组件。如果你的组件以小写字母开头，请在 JSX 中使用之前其赋值给大写开头的变量。<br/
 例如，下面的代码将无法按预期运行：
@@ -124,7 +124,7 @@ function HelloWorld() {
 ```
 为了解决这个问题，我们将 hello 重命名为 Hello，然后使用 <Hello /> 引用。
 
-##### 在运行时选择类型
+#### 在运行时选择类型
 你不能使用表达式来作为 React 元素的标签。如果你的确想通过表达式来确定 React 元素的类型，请先将其赋值给大写开头的变量。这种情况一般会在你想通过属性值条件渲染组件时出现：
 ```javascript
 import React from 'react';
@@ -156,8 +156,8 @@ function Story(props) {
   return <SpecificStory story={props.story} />;
 }
 ```
----------------------
-#### 属性
+----
+### 属性
 在 JSX 中有几种不同的方式来指定属性。
 ##### 使用 JavaScript 表达式
 ```html
@@ -176,7 +176,7 @@ function NumberDescriber(props) {
 }
 ```
 
-##### 字符串常量
+#### 字符串常量
 你可以将字符串常量作为属性值传递。下面这两个 JSX 表达式是等价的：
 ```javascript
 <MyComponent message="hello world" />
@@ -184,7 +184,7 @@ function NumberDescriber(props) {
 <MyComponent message={'hello world'} />
 ```
 
-##### 默认为 True
+#### 默认为 True
 如果你没有给属性传值，它默认为 true。因此下面两个 JSX 是等价的：
 ```javascript
 <MyTextBox autocomplete />
@@ -193,7 +193,7 @@ function NumberDescriber(props) {
 ```
 一般情况下，我们不建议这样使用，因为它会与 ES6 对象简洁表示法 混淆。比如 {foo} 是 {foo: foo} 的简写，而不是 {foo: true}。这里能这样用，是因为它符合 HTML 的做法。
 
-##### 扩展属性
+#### 扩展属性
 如果你已经有了个 props 对象，并且想在 JSX 中传递它，你可以使用 ... 作为扩展操作符来传递整个属性对象。下面两个组件是等效的：
 ```javascript
 function App1() {
@@ -207,10 +207,10 @@ function App2() {
 ```
 当你构建通用容器时，扩展属性会非常有用。然而，这样做也可能让很多不相关的属性，传递到不需要它们的组件中使代码变得混乱。我们建议你谨慎使用此语法。
 
----------------
+----
 
-#### 子代
-##### 字符串常量
+### 子代
+#### 字符串常量
 你可以在开始和结束标签之间放入一个字符串，则 props.children 就是那个字符串。这对于许多内置 HTML 元素很有用。例如：
 ```html
 <MyComponent>Hello world!</MyComponent>
@@ -238,7 +238,7 @@ JSX 会移除行空行和开始和结尾处的空格。标签邻近的新行也�
 </div>
 ```
 
-##### JSX
+#### JSX
 你可以通过子代嵌入更多的 JSX 元素，这对于嵌套显示组件非常有用：
 ```html
 <MyContainer>
@@ -269,7 +269,7 @@ render() {
 }
 ```
 
-JavaScript 表达式
+#### JavaScript 表达式
 你可以将任何 {} 包裹的 JavaScript 表达式作为子代传递。例如，下面这些表达式是等价的：
 ```html
 <MyComponent>foo</MyComponent>
@@ -297,7 +297,7 @@ function Hello(props) {
   return <div>Hello {props.addressee}!</div>;
 }
 ```
-##### 函数
+#### 函数
 通常情况下，插入 JSX 中的 JavsScript 表达式将被认作字符串、React 元素或这些内容的列表。然而，props.children 可以像其它属性一样传递任何数据，而不仅仅是 React 元素。例如，如果你使用自定义组件，则可以将调用 props.children 来获得传递的子代：
 ```javascript
 // Calls the children callback numTimes to produce a repeated component
@@ -318,6 +318,53 @@ function ListOfTenThings() {
 }
 ```
 传递给自定义组件的子代可以是任何元素，只要该组件在 React 渲染前将其转换成 React 能够理解的东西。这个用法并不常见，但当你想扩展 JSX 时可以使用。
+
+#### 布尔值、Null 和 Undefined 被忽略
+false、null、undefined 和 true 都是有效的子代，但它们不会直接被渲染。下面的表达式是等价的：
+```html   
+<div />
+
+<div></div>
+
+<div>{false}</div>
+
+<div>{null}</div>
+
+<div>{undefined}</div>
+
+<div>{true}</div>
+```  
+这在根据条件来确定是否渲染React元素时非常有用。以下的JSX只会在showHeader为true时渲染<Header />组件。
+```html
+ <div>
+   {showHeader && <Header />}
+   <Content />
+ </div>
+```
+值得注意的是，JavaScript 中的一些 “falsy” 值(比如数字0)，它们依然会被渲染。例如，下面的代码不会像你预期的那样运行，因为当 props.message 为空数组时，它会打印0:
+```html
+ <div>
+   {props.messages.length &&
+     <MessageList messages={props.messages} />
+   }
+ </div>
+```
+要解决这个问题，请确保 && 前面的表达式始终为布尔值：
+```html
+ <div>
+   {props.messages.length > 0 &&
+     <MessageList messages={props.messages} />
+   }
+ </div>
+``` 
+相反，如果你想让类似 false、true、null 或 undefined 出现在输出中，你必须先把它转换成字符串 :
+```html
+ <div>
+   My JavaScript variable is {String(myVariable)}.
+ </div>
+``` 
+
+
 
 
 
