@@ -1,10 +1,10 @@
 ```
-                                  --                    ___  
-  --------   ----- -----    -----/  |__           _    / /      _____    ___
+                                  ___                   ___  
+  ________   _____ _____    _____/  |__           _    / /      _____    ___
   \_  __  \_/ __  \\__  \ _/ ___\   ___\  __  __ | |  / /__    /___  \  / _ \
     | | \/  \ ___/ / ___ \ \ \___|  |_    \ \/ / | | |  \  | _   _/ _/ | |_| |
     |_|      \___//_/   \_\ \___/ \___|    \__/  |_|  \___/ |_|/_____\  \___/
-  ```
+```
 ## React 入门实例教程
 > 参考：https://doc.react-china.org/docs/hello-world.html 、http://www.ruanyifeng.com/blog/2015/03/react <br/>
 > 时间：2017/12/25
@@ -55,6 +55,28 @@ function GuestGreeting(props) {
 
 ## 第二篇
 - ### 深入JSX
+> 本质上来讲，JSX 只是为 React.createElement(component, props, ...children) 方法提供的语法糖。比如下面的代码：
+```html
+<MyButton color="blue" shadowSize={2}>
+  Click Me
+</MyButton>
+```
+编译为：
+```javascript
+React.createElement(
+  MyButton,
+  {color: 'blue', shadowSize: 2},
+  'Click Me'
+)
+```
+使用[在线 Babel 编译器](https://babeljs.io/repl/#?babili=false&evaluate=true&lineWrap=false&presets=es2015%2Creact%2Cstage-0&code=function%20hello()%20%7B%0A%20%20return%20%3Cdiv%3EHello%20world!%3C%2Fdiv%3E%3B%0A%7D)验证 JSX 是如何转换为 JavaScript 的。
+
+
+
+
+
+
+
 
 - ### 使用PropTypes检查类型
 
