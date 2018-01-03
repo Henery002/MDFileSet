@@ -363,10 +363,11 @@ false、null、undefined 和 true 都是有效的子代，但它们不会直接�
    My JavaScript variable is {String(myVariable)}.
  </div>
 ``` 
-----
+<br/>
+<br/>
 
 - ### 使用PropTypes检查类型
-> 注意: React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。
+> 注意: React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。<br/>
 随着应用日渐庞大，你可以通过类型检查捕获大量错误。 对于某些应用来说，你还可以使用 Flow 或 TypeScript 这样的 JavsScript 扩展来对整个应用程序进行类型检查。然而即使你不用它们，React 也有一些内置的类型检查功能。要检查组件的属性，你需要配置特殊的 propTypes 属性：
 ```javascript
 import PropTypes from 'prop-types';
@@ -384,6 +385,8 @@ Greeting.propTypes = {
 };
 ```
 PropTypes 包含一整套验证器，可用于确保你接收的数据是有效的。在这个示例中，我们使用了 PropTypes.string。当你给属性传递了无效值时，JavsScript 控制台将会打印警告。出于性能原因，propTypes 只在开发模式下进行检查。
+
+----
 
 ### PropTypes
 下面是使用不同验证器的例子：
@@ -465,6 +468,7 @@ MyComponent.propTypes = {
   })
 };
 ```
+----
 
 ### 限制单个子代
 使用 PropTypes.element 你可以指定只传递一个子代
@@ -487,6 +491,7 @@ import PropTypes from 'prop-types';
    children: PropTypes.element.isRequired
  };
  ```
+----
 
  ### 属性默认值
 你可以通过配置 defaultProps 为 props定义默认值：
