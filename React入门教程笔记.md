@@ -73,7 +73,8 @@ React.createElement(
 使用[在线 Babel 编译器](https://babeljs.io/repl/#?babili=false&evaluate=true&lineWrap=false&presets=es2015%2Creact%2Cstage-0&code=function%20hello()%20%7B%0A%20%20return%20%3Cdiv%3EHello%20world!%3C%2Fdiv%3E%3B%0A%7D)验证 JSX 是如何转换为 JavaScript 的。
 
 ----
-### 指定React元素类型
+
+1. ### 指定React元素类型
 JSX 的标签名决定了 React 元素的类型。
 大写开头的 JSX 标签表示一个 React 组件。这些标签将会被编译为同名变量并被引用，所以如果你使用了 <Foo /> 表达式，则必须在作用域中先声明 Foo 变量。 
 #### React必须声明
@@ -159,7 +160,7 @@ function Story(props) {
 ```
 ----
 
-### 属性
+2. ### 属性
 在 JSX 中有几种不同的方式来指定属性。
 ##### 使用 JavaScript 表达式
 ```html
@@ -211,7 +212,7 @@ function App2() {
 
 ----
 
-### 子代
+3. ### 子代
 #### 字符串常量
 你可以在开始和结束标签之间放入一个字符串，则 props.children 就是那个字符串。这对于许多内置 HTML 元素很有用。例如：
 ```html
@@ -391,7 +392,7 @@ PropTypes 包含一整套验证器，可用于确保你接收的数据是有效�
 
 ----
 
-### PropTypes
+1. ### PropTypes
 下面是使用不同验证器的例子：
 ```javascript
 import PropTypes from 'prop-types';
@@ -473,7 +474,7 @@ MyComponent.propTypes = {
 ```
 ----
 
-### 限制单个子代
+2. ### 限制单个子代
 使用 PropTypes.element 你可以指定只传递一个子代
 ```javascript
 import PropTypes from 'prop-types';
@@ -496,7 +497,7 @@ import PropTypes from 'prop-types';
  ```
 ----
 
-### 属性默认值
+3. ### 属性默认值
 你可以通过配置 defaultProps 为 props定义默认值：
 ```javascript
 class Greeting extends React.Component {
