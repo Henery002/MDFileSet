@@ -367,7 +367,8 @@ false、null、undefined 和 true 都是有效的子代，但它们不会直接�
 <br/>
 
 - ### 使用PropTypes检查类型
-> 注意: React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。\n
+> 注意: React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。
+
 随着应用日渐庞大，你可以通过类型检查捕获大量错误。 对于某些应用来说，你还可以使用 Flow 或 TypeScript 这样的 JavsScript 扩展来对整个应用程序进行类型检查。然而即使你不用它们，React 也有一些内置的类型检查功能。要检查组件的属性，你需要配置特殊的 propTypes 属性：
 ```javascript
 import PropTypes from 'prop-types';
