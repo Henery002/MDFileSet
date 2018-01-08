@@ -10,11 +10,9 @@
 > 时间：2017/12/25
 
 ## 第一篇
-- ### 安装
-
-- ### Hello World
-
 - ### JSX简介
+
+
 
 - ### 元素渲染
 
@@ -494,7 +492,7 @@ import PropTypes from 'prop-types';
  MyComponent.propTypes = {
    children: PropTypes.element.isRequired
  };
- ```
+```
 ----
 
 3. ### 属性默认值
@@ -546,26 +544,5 @@ class Greeting extends React.Component {
 
 - ### 性能优化
 
-- ### 不使用ES6
-
-- ### 不是用JSX
-
-- ### Reconciliation
-
-- ### Context
-
-- ### Fragments
-
-- ### Portals
-
-- ### Error boundaries
-
-- ### Web components
-
-- ### 高阶组件
-
-- ### 与第三方库协同
-
-- ### 可访问性
 
 
