@@ -11,7 +11,7 @@
 
 ### HTML模板
 React页面源码的大致结构为：
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
