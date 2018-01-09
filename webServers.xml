@@ -1,0 +1,54 @@
+<application>
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="69e843c3-c3af-419b-b115-bb8a39f5cf42" name="leopard" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" rootFolder="/home/leopard/engine/webui/dana/leopard" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="39a62672-8fb4-483a-aa9f-42fb0b9264a6" name="leopard (3)" url="http://192.168.1.221/dana/leopard">
+        <fileTransfer host="192.168.1.221" port="22" rootFolder="/home/leopard/engine/webui/dana/leopard" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" muteSftpMessages="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="a4fc68cc-570b-46a8-8885-6bd7f9cb1367" name="d-vault" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" rootFolder="/home/code/d-vault/webui" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="5aa444f8-c0b1-4bae-97ff-51d1abe72eb6" name="d-vault (1)" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" rootFolder="/home/code/d-vault/webui" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="aab69627-d9b6-425d-b36d-70baaf83ffaf" name="d-vault (2)" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" rootFolder="/home/code/d-vault/webui" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="2eee8911-6b99-4299-9381-4294964b1fda" name="d-vault" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" rootFolder="/home/code/d-vault/webui" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</application>
