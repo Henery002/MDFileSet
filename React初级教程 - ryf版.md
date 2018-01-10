@@ -90,7 +90,7 @@ const element = (
 
 
 ### 3. 元素渲染
-要将元素添加到DOM中，首先在一个 HTML 页面中添加一个 id="root" 的 <div>:
+要将元素添加到DOM中，首先在一个 HTML 页面中添加一个 id="root" 的 div:
 ```html
 <div id="root"></div>
 ```
@@ -108,11 +108,101 @@ ReactDOM.render(
 ```
 上述代码会将一个h1标签插入到root节点上展示“Hello world”内容。
 
+### 4. 组件 & props
+React中的组件有两种定义方式：函数定义、ES6 class。
+```javascript
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+该种方式直接使用js函数定义组件。该函数是一个有效的React组件，它接收一个单一的“props”对象并返回了一个React元素。
+项目中常使用ES6 class定义组件：
+```javascript
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+#### 4.1 组件的渲染
+React元素除了使用常用的DOM标签，还可以是用户自定义的组件
+```javascript
+const element = <Welcome name="Sara" />;
+```
+当React遇到的元素是用户自定义的组件，它会将JSX属性作为单个对象传递给该组件,这个对象称之为“props”。
+```javascript
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const element = <Welcome name="Sara" />;
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+```
+> 注意：组件名称必须以大写字母开头。例如：<div /> 表示一个DOM标签，但 <Welcome /> 表示一个组件，并且在使用该组件时你必须定义或引入它。
+
+#### 4.2 Props属性
+组件可以在它的输出中引用其它组件，这就可以用同一组件来抽象出任意层次的细节。在React应用中，按钮、表单、对话框等通常都被表示为组件。
+可以往组件中加入任何属性，比如 <Welcome name="Sara"> ，就是 Welcome 组件加入一个 name 属性，值为 Sara。
+组件的属性可以在组件类的 this.props 对象上获取，比如 name 属性就可以通过 this.props.name 读取。
+例如，创建一个App组件，用来多次渲染Welcome组件。<br/>
+```javascript
+class Welcome extends React.component{
+  return <h1>Hello, {this.props.name}</h1>;
+}
+
+class App extends React.component{
+  return (
+    <div>
+      <Welcome name="Sara" />
+      <Welcome name="Cahal" />
+      <Welcome name="Edite" />
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+```
+> 注意：组件的返回值只能有一个根元素。因此需要用一个div包裹所有Welcome元素。
+
+### 5. State & 生命周期
+#### 5.1 State
+React把组件看成一个状态机（State Machines）。通过与用户交互，实现不同状态的转换，然后渲染UI，让用户界面和数据保持一致。<br/>
+查看下面的例子：
+```javascript
+class LikeButton extends React.component{
+  getInitialState: function() {
+    return {liked: false};
+  },
+  handleClick: function(event) {
+    this.setState({
+      liked: !this.state.liked
+    });
+  },
+  render: function() {
+    var text = this.state.liked ? 'like' : 'haven\'t liked';
+    return (
+      <p onClick={this.handleClick}>You {text} this. Click to toggle.</p>
+    );
+  }
+});
+
+ReactDOM.render(
+  <LikeButton />,
+  document.getElementById('example')
+);
+```
+上面定义了一个 LikeButton 组件，它的 getInitialState 方法用于定义初始状态，也就是一个对象，这个对象可以通过 this.state 属性读取。当用户点击组件，导致状态变化，this.setState 方法就修改状态值，每次修改以后自动调用 this.render 方法，再次渲染组件。
+
+> 由于 this.props 和 this.state 都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。
+
+#### 5.2 生命周期
 
 
-
-
-
-
-
+### 6.
 
