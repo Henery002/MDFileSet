@@ -6,16 +6,27 @@
     |_|    \____//_/   \_\ \___/ \___|    \__/  |_|  \___/ |_|/_____\  \___/
 
 ```
-## React入门教程
+# React入门教程
 > 作    者：Henery <br/>
 > 邮    箱：henery_002@163.com <br/>
 > 参考文章：http://www.ruanyifeng.com/blog/2015/03/react、http://www.runoob.com/react/react-tutorial.html
 
-### 目录
+## 目录
 1. [HTML模板](#1-html模板)
 2. [JSX语法](#2-jsx语法)
+3. [元素渲染](#3-元素渲染)
+4. [组件 & Props](#4-组件--props)
+5. [State & 生命周期](#5-state--生命周期)
+6. [Refs & DOM](#6-refs--dom)
+7. [PropTypes类型检查](#7-proptypes类型检查)
+8. [列表 & Keys](#8-列表--keys)
+9. [事件处理](#9-事件处理)
+10. [条件渲染](#10-条件渲染)
+11. [表单](#11-表单)
+12. [组合 & 继承](#12-组合--继承)
+<br/><br/>
 
-
+## 正文
 ### 1. HTML模板
 React页面源码的大致结构为：
 ```html
