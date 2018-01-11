@@ -9,7 +9,12 @@
 ## React入门教程
 > 作    者：Henery <br/>
 > 邮    箱：henery_002@163.com <br/>
-> 参考文章：http://www.ruanyifeng.com/blog/2015/03/react
+> 参考文章：http://www.ruanyifeng.com/blog/2015/03/react、http://www.runoob.com/react/react-tutorial.html
+
+### 目录
+1. [HTML模板](#1-HTML模板)
+2. [JSX语法](#2-JSX语法)
+
 
 ### 1. HTML模板
 React页面源码的大致结构为：
