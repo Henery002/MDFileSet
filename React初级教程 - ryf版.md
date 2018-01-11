@@ -7,8 +7,8 @@
 
 ```
 ## React入门教程
-> 作    者：Henery
-> 邮    箱：henery_002@163.com
+> 作    者：Henery <br/>
+> 邮    箱：henery_002@163.com <br/>
 > 参考文章：http://www.ruanyifeng.com/blog/2015/03/react
 
 ### 1. HTML模板
