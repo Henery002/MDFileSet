@@ -6,10 +6,10 @@
     |_|    \____//_/   \_\ \___/ \___|    \__/  |_|  \___/ |_|/_____\  \___/
 
 ```
-# React入门教程
+# React入门笔记
 > 作    者：Henery <br/>
 > 邮    箱：henery_002@163.com <br/>
-> 参考文章：http://www.ruanyifeng.com/blog/2015/03/react、http://www.runoob.com/react/react-tutorial.html
+> 参考文章：http://www.ruanyifeng.com/blog/2015/03/react 、http://www.runoob.com/react/react-tutorial.html
 
 ## 目录
 1. [HTML模板](#1-html模板)
@@ -24,13 +24,14 @@
 10. [条件渲染](#10-条件渲染)
 11. [表单](#11-表单)
 12. [组合 & 继承](#12-组合--继承)
+13. 其他
 <br/><br/>
 
 ## 正文
 ### 1. HTML模板
 React页面源码的大致结构为：
 ```html
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
   <head>
     <script src="../build/react.js"></script>
