@@ -3,4 +3,7 @@
     <option name="FONT_SIZE" value="17" />
     <option name="LINE_SPACING" value="0.8" />
   </component>
+  <component name="EditorSettings">
+    <option name="USE_SOFT_WRAPS" value="" />
+  </component>
 </application>
