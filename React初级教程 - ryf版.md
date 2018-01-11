@@ -206,6 +206,7 @@ ReactDOM.render(
 - Mounting:已插入真实DOM
 - Updating:正在被重新渲染
 - Unmounting:已移出真实DOM
+
 生命周期的方法有：
 - componentWillMount: 在组件将要渲染前调用
 - 
