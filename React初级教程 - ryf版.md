@@ -264,7 +264,8 @@ ReactDOM.render(
 根据React的设计，所有的DOM变动，都先在虚拟DOM上发生，然后再将实际发生变动的部分反应在真实DOM上，这种算法叫 [DOM diff](https://calendar.perfplanet.com/2013/diff/)。它能够极大提高网页的性能。
 
 但是有时需要从组件获取到DOM节点，就需要用到 ref 属性。
-先将一个ref属性绑定到render返回值上：
+
+使用时，先将一个ref属性绑定到render返回值上：
 ```html
 <input ref="myInput" />
 ```
