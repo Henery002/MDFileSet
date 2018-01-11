@@ -12,8 +12,8 @@
 > 参考文章：http://www.ruanyifeng.com/blog/2015/03/react、http://www.runoob.com/react/react-tutorial.html
 
 ### 目录
-1. [HTML模板](#1-HTML模板)
-2. [JSX语法](#2-JSX语法)
+1. [HTML模板](#1-html模板)
+2. [JSX语法](#2-jsx语法)
 
 
 ### 1. HTML模板
