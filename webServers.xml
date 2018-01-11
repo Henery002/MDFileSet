@@ -1,0 +1,22 @@
+<application>
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="884af9c2-2f06-4f36-9afe-342708591fc5" name="d-vault" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="04c9b062-94f8-493d-b5fc-402c9bf00c22" name="d-vault" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</application>
