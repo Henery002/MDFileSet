@@ -202,6 +202,13 @@ ReactDOM.render(
 > 由于 this.props 和 this.state 都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。
 
 #### 5.2 生命周期
+组件的生命周期可分为三个状态：
+- Mounting:已插入真实DOM
+- Updating:正在被重新渲染
+- Unmounting:已移出真实DOM
+生命周期的方法有：
+- componentWillMount: 在组件将要渲染前调用
+- 
 
 
 ### 6.
