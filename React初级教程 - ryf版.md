@@ -7,6 +7,8 @@
 
 ```
 ## React入门教程
+> 作    者：Henery
+> 邮    箱：henery_002@163.com
 > 参考文章：http://www.ruanyifeng.com/blog/2015/03/react
 
 ### 1. HTML模板
@@ -271,7 +273,7 @@ ReactDOM.render(
 ```
 在其他部分代码中，通过 this.refs 获取属性
 ```javascript
-var input = this.refs.myInput;      //input为真实DOM对象
+var input = this.refs.myInput;      //input为DOM对象
 var inputValue = input.value;
 ```
 查看完整实例：
@@ -303,9 +305,9 @@ ReactDOM.render(
 ```
 此外，也可以使用 [**getDOMNode()**](https://segmentfault.com/q/1010000006198939) 方法获取DOM元素。
 
-更多关于 Refs 的内容，参见[官方文档](https://doc.react-china.org/docs/refs-and-the-dom.html)
+更多关于 Refs 的内容，参见[官方文档](https://doc.react-china.org/docs/refs-and-the-dom.html)。
 
-> 注意：ref 属性无法应用在函数式组件上，因为函数式组件没有实例，应该将其转化为 class 组件
+> 注意：ref 属性无法应用在函数式组件上，因为函数式组件没有实例，应该将其转化为 class 组件。
 
 ### 7. PropTypes类型检查
 > 注意：React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。
