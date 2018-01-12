@@ -22,8 +22,7 @@
 8. [列表 & Keys](#8-列表--keys)
 9. [事件处理](#9-事件处理)
 10. [表单](#10-表单)
-11. [组合 & 继承](#11-组合--继承)
-12. 其他
+11. 其他
 <br/><br/>
 
 ## 正文
@@ -167,18 +166,22 @@ ReactDOM.render(
 组件的属性可以在组件类的 this.props 对象上获取，比如 name 属性就可以通过 this.props.name 读取。
 例如，创建一个App组件，用来多次渲染Welcome组件。<br/>
 ```javascript
-class Welcome extends React.component{
-  return <h1>Hello, {this.props.name}</h1>;
+class Welcome extends React.Component{
+  render(){
+    return <h1>Hello, {this.props.name}</h1>;
+  }
 }
 
-class App extends React.component{
-  return (
-    <div>
-      <Welcome name="Sara" />
-      <Welcome name="Cahal" />
-      <Welcome name="Edite" />
-    </div>
-  );
+class App extends React.Component{
+  render(){
+    return (
+      <div>
+        <Welcome name="Sara" />
+        <Welcome name="Cahal" />
+        <Welcome name="Edite" />
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(
@@ -188,27 +191,70 @@ ReactDOM.render(
 ```
 > 注意：组件的返回值只能有一个根元素。因此需要用一个div包裹所有Welcome元素。
 
+#### 4.3 this.props.children
+this.props对象的属性与组件的属性一一对应，但 this.props.children 属性除外。它表示组件的所有子节点。
+参看下面的例子：
+```javascript
+class NotesList extends React.Component {
+  render() {
+    return (
+      <ol>
+        {React.Children.map(this.props.children, (child) => <li>{child}</li>)}
+      </ol>
+    );
+  }
+}
+
+ReactDOM.render(
+  <NotesList>
+    <span>hello</span>
+    <span>world</span>
+  </NotesList>,
+  document.body
+);
+```
+该例中，NotesList 组件有两个 span 子节点，它们都可以通过 this.props.children 被读取到。最后的输出结果(html结构)是：
+```html
+<ol>
+  <li>
+    <span>hello</span>
+  </li>
+  <li>
+    <span>world</span>
+  </li>
+</ol>
+```
+> 注意：this.props.children 的值有三种取值类型：
+> - 如果当前组件没有子节点，其值为 undefined
+> - 如果有一个子节点，其值为 object 类型
+> - 如果有多个子节点，其值为 array 类型
+> 因此在处理 this.props.children 时需要注意。
+
+React 提供了一个工具方法 [**React.Children**](https://doc.react-china.org/docs/react-api.html#reactchildren) 来处理 this.props.children 。
+所以可以使用 React.Children.map 来遍历子节点，而不用担心 this.props.children 的数据类型是 undefined 还是 object。
+
 ### 5. State & 生命周期
 #### 5.1 State
 React把组件看成一个状态机（State Machines）。通过与用户交互，实现不同状态的转换，然后渲染UI，让用户界面和数据保持一致。<br/>
 查看下面的例子：
 ```javascript
-class LikeButton extends React.component{
-  getInitialState: function() {
-    return {liked: false};
-  },
-  handleClick: function(event) {
+class LikeButton extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {liked:false};
+  }
+  handleClick = (event) => {
     this.setState({
       liked: !this.state.liked
     });
-  },
-  render: function() {
+  }
+  render() {
     var text = this.state.liked ? 'like' : 'haven\'t liked';
     return (
       <p onClick={this.handleClick}>You {text} this. Click to toggle.</p>
     );
   }
-});
+};
 
 ReactDOM.render(
   <LikeButton />,
@@ -239,14 +285,13 @@ ReactDOM.render(
 
 参考以下示例：
 ```javascript
-class Hello extends React.component{
-  getInitialState: function () {
-    return {
-      opacity: 1.0
-    };
-  },
+class Hello extends React.Component{
+  constructor(){
+    super();
+    this.state = {opacity:1.0}
+  }
 
-  componentDidMount: function () {
+  componentDidMount = () => {
     this.timer = setInterval(function () {
       var opacity = this.state.opacity;
       opacity -= .05;
@@ -259,7 +304,7 @@ class Hello extends React.component{
     }.bind(this), 100);
   },
 
-  render: function () {
+  render () {
     return (
       <div style={{opacity: this.state.opacity}}>
         Hello {this.props.name}
@@ -294,12 +339,12 @@ var inputValue = input.value;
 ```
 查看完整实例：
 ```javascript
-class MyComponent extends React.componet{
-  handleClick: function() {
+class MyComponent extends React.Componet{
+  handleClick = () => {
     // 使用原生的 DOM API 获取焦点
     this.refs.myInput.focus();
-  },
-  render: function() {
+  }
+  render () {
     //  当组件插入到 DOM 后，ref 属性添加一个组件的引用到 this.refs
     return (
       <div>
@@ -450,15 +495,12 @@ ReactDOM.render(
 ```
 通常情况下，会将这种渲染列表的需求封装成一个组件，这个组件会接收numbers数组作为参数，输出一个列表：
 ```javascript
-class NumberList extends React.component {
-  const listItems = this.props.numbers.map((number) => 
-    <li key={number.toString()}>        //为每个列表元素分配一个唯一key值，详见下一小节
-      {number}
-    </li>
-  );
-  return(
-    <ul>{listItems}</ul>
-  );
+class NumberList extends React.Component {
+  render(){
+    const listItems = this.props.numbers.map((number) => <li key={number.toString()}>{number}<li>);
+    return
+      <ul>{listItems}</ul>
+  }
 }
 
 const numbers = [2,4,6,8,10];
@@ -578,11 +620,92 @@ handleClick = (e) => {      //ES6箭头函数
 React 组件支持很多事件，除了 Click 事件外，还有 KeyDown 、Copy、Scroll 等，详细事件清单参见官方文档[支持的事件](https://doc.react-china.org/docs/events.html#支持的事件)。
 
 ### 10. 表单
+用户在表单填入的内容，属于用户跟组件之间的交互，所以不能用 this.props 读取。
+
+#### 10.1 简单表单
+下面的例子中设置了输入框input的值value={this.state.data}，在输入框值发生变化的同时更新state。此处使用onChange事件来监听input值的变化并修改state：
+```javascript
+class HelloMessage extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      value:'Hello World!'
+    }
+  }
+
+  handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
+
+  render () {
+    return (
+      <div>
+        <input 
+          type="text" 
+          value={this.state.value} 
+          onChange={this.handleChange} 
+        /> 
+        <h4>{this.state.value}</h4>
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <HelloMessage />,
+  document.getElementById('example')
+)
+```
+该例渲染出一个input输入框，并通过onChange事件监听同步更新用户输入的值到state。
+
+#### 10.2 在子组件上使用表单
+下面的例子展示如何在子组件上使用表单。
+```javascript
+class Content extends React.Component{
+  render () {
+    return (
+      <div>
+        <input type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp} />
+        <h4>{this.props.myDataProp}</h4>
+      </div>
+    );
+  }
+}
+
+class HelloMessage extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      value:"Hello World!"
+    }
+  }
+  handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
+  render() {
+    let value = this.state.value;
+    return (
+      <div>
+        <Content 
+          myDataProp = {value} 
+          updateStateProp = {this.handleChange}
+        />
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <HelloMessage />,
+  document.getElementById('example')
+);
+```
+onChange方法将触发state的更新并将更新的值传递到组件的输入框的value上来重新渲染界面。
+
+这里需要通过在父组件 HelloMessage 上创建事件句柄 handleChange ，并作为 prop(updateStateProp) 传递到子组件 Content 上。
+
+### 11. 其他
 
 
 
-
-
-
-### 11. 组合 & 继承
 
