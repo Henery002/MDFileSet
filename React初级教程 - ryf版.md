@@ -325,6 +325,7 @@ ReactDOM.render(
 上面代码在hello组件加载以后，通过 componentDidMount 方法设置一个定时器，每隔100毫秒就重新设置组件的透明度，从而引发重新渲染。
 > 注意：该例中，组件的style属性的设置方式不能写成：style="opacity:{this.state.opacity};"，应该写成：style={{opacity:this.state.opacity}}
 > 因为 React 组件样式是一个对象，所以第一层大括号表示这是 js 语法，第二层大括号表示样式对象。
+<br/>
 
 ### 6. Refs & DOM
 在React中，组件并不是真实的DOM节点，而是存在于内存中的一种数据结构，叫做虚拟DOM（virtual DOM）。只有当它插入文档之后才会成为真实DOM。
@@ -377,6 +378,7 @@ ReactDOM.render(
 更多关于 Refs 的内容，参见[官方文档](https://doc.react-china.org/docs/refs-and-the-dom.html)。
 
 > 注意：ref 属性无法应用在函数式组件上，因为函数式组件没有实例，应该将其转化为 class 组件。
+<br/>
 
 ### 7. PropTypes类型检查
 > 注意：React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。
@@ -481,6 +483,7 @@ ReactDOM.render(
 ```
 这样一来，如果name属性未被赋值的话，它将会有默认值。
 > 注意：defaultProps 用来确保 this.props.name 在父组件没有特别指定的情况下，有一个初始值。类型检查发生在 defaultProps 赋值之后，所以类型检查也会应用在 defaultProps 上面。
+<br/>
 
 ### 8. 列表 & Keys
 #### 8.1 列表组件
@@ -595,6 +598,7 @@ var element = React.createElement(
 > 还有一种比较常见的场景是：为一个有复杂繁琐逻辑的组件添加key后，后续操作可以改变该组件的key属性值，从而达到先销毁之前的组件，再重新创建该组件的目的。
 
 关于key属性更多详细信息，参见[React之Key详解](https://segmentfault.com/a/1190000009149186)。
+<br/>
 
 ### 9. 事件处理
 React元素的事件处理和DOM元素的相似，但有语法上的不同。
@@ -622,6 +626,7 @@ handleClick = (e) => {      //ES6箭头函数
 }
 ```
 React 组件支持很多事件，除了 Click 事件外，还有 KeyDown 、Copy、Scroll 等，详细事件清单参见官方文档[支持的事件](https://doc.react-china.org/docs/events.html#支持的事件)。
+<br/>
 
 ### 10. 表单
 用户在表单填入的内容，属于用户跟组件之间的交互，所以不能用 this.props 读取。
@@ -707,6 +712,7 @@ ReactDOM.render(
 onChange方法将触发state的更新并将更新的值传递到组件的输入框的value上来重新渲染界面。
 
 这里需要通过在父组件 HelloMessage 上创建事件句柄 handleChange ，并作为 prop(updateStateProp) 传递到子组件 Content 上。
+<br/>
 
 ### 11. 其他
 
