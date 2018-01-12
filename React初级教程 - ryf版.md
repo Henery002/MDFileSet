@@ -126,6 +126,7 @@ ReactDOM.render(
 ```
 上述代码会将一个h1标签插入到root节点上展示“Hello world”内容。
 <br/>
+<br/>
 
 ### 4. 组件 & props
 React中的组件有两种定义方式：函数定义、ES6 class。
@@ -235,6 +236,7 @@ ReactDOM.render(
 
 React 提供了一个工具方法 [**React.Children**](https://doc.react-china.org/docs/react-api.html#reactchildren) 来处理 this.props.children 。
 所以可以使用 React.Children.map 来遍历子节点，而不用担心 this.props.children 的数据类型是 undefined 还是 object。
+<br/>
 <br/>
 
 ### 5. State & 生命周期
@@ -599,6 +601,7 @@ var element = React.createElement(
 
 关于key属性更多详细信息，参见[React之Key详解](https://segmentfault.com/a/1190000009149186)。
 <br/>
+<br/>
 
 ### 9. 事件处理
 React元素的事件处理和DOM元素的相似，但有语法上的不同。
@@ -626,6 +629,7 @@ handleClick = (e) => {      //ES6箭头函数
 }
 ```
 React 组件支持很多事件，除了 Click 事件外，还有 KeyDown 、Copy、Scroll 等，详细事件清单参见官方文档[支持的事件](https://doc.react-china.org/docs/events.html#支持的事件)。
+<br/>
 <br/>
 
 ### 10. 表单
@@ -712,6 +716,7 @@ ReactDOM.render(
 onChange方法将触发state的更新并将更新的值传递到组件的输入框的value上来重新渲染界面。
 
 这里需要通过在父组件 HelloMessage 上创建事件句柄 handleChange ，并作为 prop(updateStateProp) 传递到子组件 Content 上。
+<br/>
 <br/>
 
 ### 11. 其他
