@@ -21,17 +21,16 @@
 7. [PropTypes类型检查](#7-proptypes类型检查)
 8. [列表 & Keys](#8-列表--keys)
 9. [事件处理](#9-事件处理)
-10. [条件渲染](#10-条件渲染)
-11. [表单](#11-表单)
-12. [组合 & 继承](#12-组合--继承)
-13. 其他
+10. [表单](#10-表单)
+11. [组合 & 继承](#11-组合--继承)
+12. 其他
 <br/><br/>
 
 ## 正文
 ### 1. HTML模板
 React页面源码的大致结构为：
 ```html
-!DOCTYPE html>
+'!DOCTYPE html>
 <html>
   <head>
     <script src="../build/react.js"></script>
@@ -320,6 +319,10 @@ ReactDOM.render(
   document.getElementById('example')
 )
 ```
+需要注意的是，由于 this.refs.[refName] 属性获取的是真实 DOM ，所以必须等到虚拟 DOM 插入文档以后，才能使用这个属性，否则会报错。
+
+上面代码中，通过为组件指定 Click 事件的回调函数，确保了只有等到真实 DOM 发生 Click 事件之后，才会读取 this.refs.[refName] 属性。
+
 此外，也可以使用 [**getDOMNode()**](https://segmentfault.com/q/1010000006198939) 方法获取DOM元素。
 
 更多关于 Refs 的内容，参见[官方文档](https://doc.react-china.org/docs/refs-and-the-dom.html)。
@@ -428,23 +431,158 @@ ReactDOM.render(
 );
 ```
 这样一来，如果name属性未被赋值的话，它将会有默认值。
-
 > 注意：defaultProps 用来确保 this.props.name 在父组件没有特别指定的情况下，有一个初始值。类型检查发生在 defaultProps 赋值之后，所以类型检查也会应用在 defaultProps 上面。
 
 ### 8. 列表 & Keys
+#### 8.1 列表组件
+在React中，使用map()方法将遍历数组，将数组转化为元素。来看下面的demo。
+使用js中的 map() 方法遍历numbers数组，对数组中的每个元素返回li标签，得到一个数组 listItems ,最后将数组插入到ul元素中渲染近DOM中，就生成了一个列表：
+```javascript
+const numbers = [2,4,6,8,10];
+const listItems = numbers.map((number) => 
+  <li>{number}</li>
+)
 
+ReactDOM.render(
+  <ul>{listItems}</ul>,
+  document.getElementById('root')
+)
+```
+通常情况下，会将这种渲染列表的需求封装成一个组件，这个组件会接收numbers数组作为参数，输出一个列表：
+```javascript
+class NumberList extends React.component {
+  const listItems = this.props.numbers.map((number) => 
+    <li key={number.toString()}>        //为每个列表元素分配一个唯一key值，详见下一小节
+      {number}
+    </li>
+  );
+  return(
+    <ul>{listItems}</ul>
+  );
+}
 
+const numbers = [2,4,6,8,10];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.body
+)
+```
+该例中，若最初没有给li元素添加key值，运行代码时会得到警告信息：
+> a key should be provided for list items.
 
+所以在创建元素时必须为其赋key属性。
 
+#### 8.2 [Keys](https://segmentfault.com/a/1190000009149186)
+React中的key属性是一个特殊的属性，它的出现不是给开发者用的（例如为一个组件设置key之后不能获取到组件的这个key值），而是给react自己用的。
+
+简单来说，react利用key来识别组件，是一种身份标识，每个key对应一个组件，相同的key，react会认为是同一个组件，这样后续相同的key对应的组件都不会被创建，例如：
+```javascript
+this.state = {
+  users:[
+    {id:1, name:'Github'},
+    {id:2, name:'CSDN'},
+    {id:3, name:'StackOverflow'}
+  ]
+}
+
+render(){
+  return(
+    <div>
+      <h2>平台列表</h2>
+      <ul>
+        {this.state.users.map((val,idx) => 
+          <li key={val.id}>{val.id} : {val.name}</li>
+        )}
+      </ul>
+    </div>
+  )
+}
+```
+在上面的例子中，DOM渲染挂载结束后，平台列表只有GitHub、CSDN两项，StackOverflow并没有展示。主要是因为react根据key值认为CSDN和StackOverflow是同一个组件，导致第一个被渲染之后，后续的被丢弃。
+
+如此一来，有了key值之后就与组件建立了一种对应关系，react根据key来决定销毁重新创建组件还是更新组件。
+
+- **key值相同**：若组件属性有所变化，则react值更新对应组件对应的属性，没有变化则不更新。
+- **key值不同**：则react先销毁该组件（有状态组件的componentWillUnmount会执行），然后重新创建该组件（有状态组件的constructor和componentWillUnmount都会执行）。
+
+> 注意：key不是用来提升react性能的，但是用好key对性能的提升有帮助。
+
+#### 8.3 key的使用场景
+在项目开发中，**key属性大多应用在由数组动态创建子组件的情况下**，需要为每个子组件添加唯一的key属性值。
+那么为什么有数组动态创建的组件必须使用key属性？这跟数组元素的动态性有关。
+以上例为例，看一下babel对上述代码的转换情况：
+```javascript
+//转换前
+const element = (
+    <ul>
+      {[<li key={1}>1:Github</li>, <li key={2}>2:CSDN</li>]}
+    </ul>
+);
+
+//转换后
+"use strict";
+
+var element = React.createElement(
+  "ul",
+  null,
+  [
+    React.createElement("li",{ key: 1 },"1:Github"), 
+    React.createElement("li",{ key: 2 },"2:CSDN")
+  ]
+);
+```
+由babel转换后React.createElement中的代码可以看出，key在其它元素中之所以不必须是因为不管组件的state或者props如何变化，这些元素始终占据着React.createElement固定的位置，这个位置就是天然的key。
+而由数组创建的组件可能由于动态的操作导致重新渲染时，子组件的位置发生了变化，例如上面列表中新增一项，上面两项的位置可能变化为下面这样：
+```javascript
+var element = React.createElement(
+  "ul",
+  null,
+  [
+    React.createElement("li",{ key: 3 },"1:StackOverflow"), 
+    React.createElement("li",{ key: 1 },"2:Github"), 
+    React.createElement("li",{ key: 2 },"3:CSDN")
+  ]
+);
+```
+可以看出，数组创建子组件的位置并不固定，是动态改变的。这样有了key属性后，react就可以根据key值来判断是否为同一组件。
+
+> 还有一种比较常见的场景是：为一个有复杂繁琐逻辑的组件添加key后，后续操作可以改变该组件的key属性值，从而达到先销毁之前的组件，再重新创建该组件的目的。
+
+关于key属性更多详细信息，参见[React之Key详解](https://segmentfault.com/a/1190000009149186)。
 
 ### 9. 事件处理
+React元素的事件处理和DOM元素的相似，但有语法上的不同。
+- React事件绑定属性的命名采用驼峰式命名，不是小写
+- 如果采用JSX的语法，需要传入一个函数作为事件处理函数，而不是一个字符串（DOM元素的写法）
+```javascript
+//传统的HTML
+<button onclick="activateLasers()">
+  //...
+</button>
+
+//React中的事件绑定
+<button onClick={activateLasers}>
+  //...
+</button>
+```
+- 不能使用 return false 的方式阻止默认行为，必须明确的使用 preventDefault
+```javascript
+handleClick = (e) => {      //ES6箭头函数
+  e.preventDefault();       //react中阻止默认行为的方法
+  this.setState({
+    value: 'value2'
+  });
+  console.log('The link was clicked.');
+}
+```
+React 组件支持很多事件，除了 Click 事件外，还有 KeyDown 、Copy、Scroll 等，详细事件清单参见官方文档[支持的事件](https://doc.react-china.org/docs/events.html#支持的事件)。
+
+### 10. 表单
 
 
-### 10. 条件渲染
 
 
-### 11. 表单
 
 
-### 12. 组合 & 继承
+### 11. 组合 & 继承
 
