@@ -227,7 +227,8 @@ ReactDOM.render(
 > 注意：this.props.children 的值有三种取值类型：
 > - 如果当前组件没有子节点，其值为 undefined
 > - 如果有一个子节点，其值为 object 类型
-> - 如果有多个子节点，其值为 array 类型 <br/>
+> - 如果有多个子节点，其值为 array 类型
+>
 > 因此在处理 this.props.children 时需要注意。
 
 React 提供了一个工具方法 [**React.Children**](https://doc.react-china.org/docs/react-api.html#reactchildren) 来处理 this.props.children 。
