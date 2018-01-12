@@ -31,7 +31,7 @@
 ### 1. HTML模板
 React页面源码的大致结构为：
 ```html
-!DOCTYPE html>
+'!DOCTYPE html>
 <html>
   <head>
     <script src="../build/react.js"></script>
@@ -428,11 +428,46 @@ ReactDOM.render(
 );
 ```
 这样一来，如果name属性未被赋值的话，它将会有默认值。
-
 > 注意：defaultProps 用来确保 this.props.name 在父组件没有特别指定的情况下，有一个初始值。类型检查发生在 defaultProps 赋值之后，所以类型检查也会应用在 defaultProps 上面。
 
 ### 8. 列表 & Keys
+#### 8.1 列表组件
+在React中，使用map()方法将遍历数组，将数组转化为元素。来看下面的demo。
+使用js中的 map() 方法遍历numbers数组，对数组中的每个元素返回li标签，得到一个数组 listItems ,最后将数组插入到ul元素中渲染近DOM中，就生成了一个列表：
+```javascript
+const numbers = [2,4,6,8,10];
+const listItems = numbers.map((number) => 
+  <li>{number}</li>
+)
 
+ReactDOM.render(
+  <ul>{listItems}</ul>,
+  document.getElementById('root')
+)
+```
+通常情况下，会将这种渲染列表的需求封装成一个组件，这个组件会接收numbers数组作为参数，输出一个列表：
+```javascript
+class NumberList extends React.component {
+  const listItems = this.props.numbers.map((number) => 
+    <li key={number.toString()}>        //为每个列表元素分配一个唯一key值，详见下一小节
+      {number}
+    </li>
+  );
+  return(
+    <ul>{listItems}</ul>
+  );
+}
+
+const numbers = [2,4,6,8,10];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.body
+)
+```
+该例中，若最初没有给li元素添加key值，运行代码时会得到警告信息：
+> a key should be provided for list items.。所以在创建元素时必须为其赋key属性。
+
+#### 8.2 Keys
 
 
 
