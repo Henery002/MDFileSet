@@ -6,13 +6,32 @@
     |_|    \____//_/   \_\ \___/ \___|    \__/  |_|  \___/ |_|/_____\  \___/
 
 ```
-## React入门教程
-> 参考文章：http://www.ruanyifeng.com/blog/2015/03/react
+# React入门笔记
+> 作    者：Henery <br/>
+> 邮    箱：henery_002@163.com <br/>
+> 参考文章：http://www.ruanyifeng.com/blog/2015/03/react 、http://www.runoob.com/react/react-tutorial.html
 
+## 目录
+1. [HTML模板](#1-html模板)
+2. [JSX语法](#2-jsx语法)
+3. [元素渲染](#3-元素渲染)
+4. [组件 & Props](#4-组件--props)
+5. [State & 生命周期](#5-state--生命周期)
+6. [Refs & DOM](#6-refs--dom)
+7. [PropTypes类型检查](#7-proptypes类型检查)
+8. [列表 & Keys](#8-列表--keys)
+9. [事件处理](#9-事件处理)
+10. [条件渲染](#10-条件渲染)
+11. [表单](#11-表单)
+12. [组合 & 继承](#12-组合--继承)
+13. 其他
+<br/><br/>
+
+## 正文
 ### 1. HTML模板
 React页面源码的大致结构为：
 ```html
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
   <head>
     <script src="../build/react.js"></script>
@@ -202,7 +221,230 @@ ReactDOM.render(
 > 由于 this.props 和 this.state 都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。
 
 #### 5.2 生命周期
+组件的生命周期可分为三个状态：
+- Mounting：已插入真实DOM
+- Updating：正在被重新渲染
+- Unmounting：已移出真实DOM
+
+三种状态共计五中处理函数：
+- componentWillMount： 在组件将要渲染前调用，在客户端也在服务端。
+- componentDidMount： 在第一次渲染后调用，只在客户端。
+之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。如果想和其他js框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)。
+- componentWillReceiveProps： 在组件接收到一个新的prop时被调用。这个方法在初始化render时不会被调用。
+- componentDidUpdate： 在组件完成更新后立即调用。在初始化时不会被调用。
+- componentWillUnmount： 在组件从 DOM 中移除的时候立刻被调用。
+
+此外，React还提供了两种特殊状态的处理函数：
+- shouldComponentUpdate： 返回一个布尔值。在组件接收到新的props或者state时被调用。在初始化时或者使用forceUpdate时不被调用。 
+- componentWillUpdate： 在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。
+
+参考以下示例：
+```javascript
+class Hello extends React.component{
+  getInitialState: function () {
+    return {
+      opacity: 1.0
+    };
+  },
+
+  componentDidMount: function () {
+    this.timer = setInterval(function () {
+      var opacity = this.state.opacity;
+      opacity -= .05;
+      if (opacity < 0.1) {
+        opacity = 1.0;
+      }
+      this.setState({
+        opacity: opacity
+      });
+    }.bind(this), 100);
+  },
+
+  render: function () {
+    return (
+      <div style={{opacity: this.state.opacity}}>
+        Hello {this.props.name}
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Hello name="world"/>,
+  document.body
+);
+```
+上面代码在hello组件加载以后，通过 componentDidMount 方法设置一个定时器，每隔100毫秒就重新设置组件的透明度，从而引发重新渲染。
+> 注意：该例中，组件的style属性的设置方式不能写成：style="opacity:{this.state.opacity};"，应该写成：style={{opacity:this.state.opacity}}
+> 因为 React 组件样式是一个对象，所以第一层大括号表示这是 js 语法，第二层大括号表示样式对象。
+
+### 6. Refs & DOM
+在React中，组件并不是真实的DOM节点，而是存在于内存中的一种数据结构，叫做虚拟DOM（virtual DOM）。只有当它插入文档之后才会成为真实DOM。
+根据React的设计，所有的DOM变动，都先在虚拟DOM上发生，然后再将实际发生变动的部分反应在真实DOM上，这种算法叫 [DOM diff](https://calendar.perfplanet.com/2013/diff/)。它能够极大提高网页的性能。
+
+但是有时需要从组件获取到DOM节点，就需要用到 ref 属性。
+
+使用时，先将一个ref属性绑定到render返回值上：
+```html
+<input ref="myInput" />
+```
+在其他部分代码中，通过 this.refs 获取属性
+```javascript
+var input = this.refs.myInput;      //input为DOM对象
+var inputValue = input.value;
+```
+查看完整实例：
+```javascript
+class MyComponent extends React.componet{
+  handleClick: function() {
+    // 使用原生的 DOM API 获取焦点
+    this.refs.myInput.focus();
+  },
+  render: function() {
+    //  当组件插入到 DOM 后，ref 属性添加一个组件的引用到 this.refs
+    return (
+      <div>
+        <input type="text" ref="myInput" />
+        <input
+          type="button"
+          value="点击"
+          onClick={this.handleClick}
+        />
+      </div>
+    );
+  }
+}
+ 
+ReactDOM.render(
+  <MyComponent />,
+  document.getElementById('example')
+)
+```
+此外，也可以使用 [**getDOMNode()**](https://segmentfault.com/q/1010000006198939) 方法获取DOM元素。
+
+更多关于 Refs 的内容，参见[官方文档](https://doc.react-china.org/docs/refs-and-the-dom.html)。
+
+> 注意：ref 属性无法应用在函数式组件上，因为函数式组件没有实例，应该将其转化为 class 组件。
+
+### 7. PropTypes类型检查
+> 注意：React.PropTypes 自 React v15.5 起已弃用。请使用 prop-types 库代替。
+
+#### 7.1 PropTypes
+我们知道，组件的属性可以接受任意类型的值，如字符串、对象、函数。
+这就需要一种机制来验证当使用组件时提供的参数是否符合要求。组件的PropTypes属性就是用作验证组件实例的属性是否符合要求的。
+
+要检查组件的属性，就需要配置特殊的propTypes属性：
+```javascript
+import PropTypes from 'prop-types';
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+//类型检查
+Greeting.propTypes = {
+  name: PropTypes.string
+};
+```
+该例中使用了PropTypes.string，它规定name属性必须是字符串类型值，当给属性传递了错误类型的值后js控制台会打印警告信息：
+```javascript
+Warning: Failed propType: Invalid prop `name` of type `string` supplied to `Greeting`, expected `string`.
+```
+其他使用类型检查验证器的例子：
+```javascript
+import PropTypes from 'prop-types';
+MyComponent.propTypes = {
+  // 可以将属性声明为以下 JS 原生类型
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+  optionalSymbol: PropTypes.symbol,
+
+  // 任何可被渲染的元素（包括数字、字符串、子元素或数组）。
+  optionalNode: PropTypes.node,
+
+  // 一个 React 元素
+  optionalElement: PropTypes.element,
+
+  // 也可以声明属性为某个类的实例，这里使用 JS 的 instanceof 操作符实现。
+  optionalMessage: PropTypes.instanceOf(Message),
+
+  // 也可以限制属性值是某个特定值之一
+  optionalEnum: PropTypes.oneOf(['News', 'Photos']),
+
+  // 限制它为列举类型之一的对象
+  optionalUnion: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Message)
+  ]),
+
+  // 一个指定元素类型的数组
+  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
+
+  // 一个指定类型的对象
+  optionalObjectOf: PropTypes.objectOf(PropTypes.number),
+
+  // 一个指定属性及其类型的对象
+  optionalObjectWithShape: PropTypes.shape({
+    color: PropTypes.string,
+    fontSize: PropTypes.number
+  }),
+
+  // 也可以在任何 PropTypes 属性后面加上 `isRequired` 后缀，这样如果这个属性父组件没有提供时，会打印警告信息
+  requiredFunc: PropTypes.func.isRequired,
+
+  // 任意类型的数据
+  requiredAny: PropTypes.any.isRequired,
+};
+```
+
+#### 7.2 属性默认值
+还可以使用 defaultProps 为组件props定义默认值：
+```javascript
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+// 为属性指定默认值:
+Greeting.defaultProps = {
+  name: 'Stranger'
+};
+
+// 渲染 "Hello, Stranger":
+ReactDOM.render(
+  <Greeting />,
+  document.getElementById('example')
+);
+```
+这样一来，如果name属性未被赋值的话，它将会有默认值。
+
+> 注意：defaultProps 用来确保 this.props.name 在父组件没有特别指定的情况下，有一个初始值。类型检查发生在 defaultProps 赋值之后，所以类型检查也会应用在 defaultProps 上面。
+
+### 8. 列表 & Keys
 
 
-### 6.
+
+
+
+### 9. 事件处理
+
+
+### 10. 条件渲染
+
+
+### 11. 表单
+
+
+### 12. 组合 & 继承
 
