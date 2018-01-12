@@ -47,6 +47,7 @@ React页面源码的大致结构为：
 需要注意的是：
 1. 最后一个 script 标签的 type 属性为 text/babel 。这是因为 React 独有的 JSX 语法，跟 JavaScript 不兼容。凡是使用 JSX 的地方，都要加上 type="text/babel" 。
 2. 上面代码一共用了三个库： react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。其中，react.js 是 React 的核心库，react-dom.js 是提供与 DOM 相关的功能，Browser.js 的作用是将 JSX 语法转为 JavaScript 语法，这一步很消耗时间，实际上线的时候，应该将它放到服务器完成。
+<br/>
 
 ### 2. JSX语法
 JSX是JavaScript的一种语法扩展，它可以将html语言直接写在js语言中，例如JSX使用这种语法声明变量：
@@ -104,7 +105,7 @@ const element = (
 ```
 > 因为 JSX 的特性更接近 JavaScript 而不是 HTML , 所以 React DOM 使用 camelCase 小驼峰命名 来定义属性的名称，而不是使用 HTML 的属性名称。
 > 例如，class 变成了 className，而 tabindex 则对应着 tabIndex.
-
+<br/>
 
 ### 3. 元素渲染
 要将元素添加到DOM中，首先在一个 HTML 页面中添加一个 id="root" 的 div:
@@ -124,6 +125,7 @@ ReactDOM.render(
 );
 ```
 上述代码会将一个h1标签插入到root节点上展示“Hello world”内容。
+<br/>
 
 ### 4. 组件 & props
 React中的组件有两种定义方式：函数定义、ES6 class。
@@ -233,6 +235,7 @@ ReactDOM.render(
 
 React 提供了一个工具方法 [**React.Children**](https://doc.react-china.org/docs/react-api.html#reactchildren) 来处理 this.props.children 。
 所以可以使用 React.Children.map 来遍历子节点，而不用担心 this.props.children 的数据类型是 undefined 还是 object。
+<br/>
 
 ### 5. State & 生命周期
 #### 5.1 State
