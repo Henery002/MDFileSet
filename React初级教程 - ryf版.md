@@ -465,12 +465,87 @@ ReactDOM.render(
 )
 ```
 该例中，若最初没有给li元素添加key值，运行代码时会得到警告信息：
-> a key should be provided for list items.。所以在创建元素时必须为其赋key属性。
+> a key should be provided for list items.
 
-#### 8.2 Keys
+所以在创建元素时必须为其赋key属性。
 
+#### 8.2 [Keys](https://segmentfault.com/a/1190000009149186)
+React中的key属性是一个特殊的属性，它的出现不是给开发者用的（例如为一个组件设置key之后不能获取到组件的这个key值），而是给react自己用的。
 
+简单来说，react利用key来识别组件，是一种身份标识，每个key对应一个组件，相同的key，react会认为是同一个组件，这样后续相同的key对应的组件都不会被创建，例如：
+```javascript
+this.state = {
+  users:[
+    {id:1, name:'Github'},
+    {id:2, name:'CSDN'},
+    {id:3, name:'StackOverflow'}
+  ]
+}
 
+render(){
+  return(
+    <div>
+      <h2>平台列表</h2>
+      <ul>
+        {this.state.users.map((val,idx) => 
+          <li key={val.id}>{val.id} : {val.name}</li>
+        )}
+      </ul>
+    </div>
+  )
+}
+```
+在上面的例子中，DOM渲染挂载结束后，平台列表只有GitHub、CSDN两项，StackOverflow并没有展示。主要是因为react根据key值认为CSDN和StackOverflow是同一个组件，导致第一个被渲染之后，后续的被丢弃。
+
+如此一来，有了key值之后就与组件建立了一种对应关系，react根据key来决定销毁重新创建组件还是更新组件。
+
+- **key值相同**：若组件属性有所变化，则react值更新对应组件对应的属性，没有变化则不更新。
+- **key值不同**：则react先销毁该组件（有状态组件的componentWillUnmount会执行），然后重新创建该组件（有状态组件的constructor和componentWillUnmount都会执行）。
+
+> 注意：key不是用来提升react性能的，但是用好key对性能的提升有帮助。
+
+#### 8.3 key的使用场景
+在项目开发中，**key属性大多应用在由数组动态创建子组件的情况下**，需要为每个子组件添加唯一的key属性值。
+那么为什么有数组动态创建的组件必须使用key属性？这跟数组元素的动态性有关。
+以上例为例，看一下babel对上述代码的转换情况：
+```javascript
+//转换前
+const element = (
+    <ul>
+      {[<li key={1}>1:Github</li>, <li key={2}>2:CSDN</li>]}
+    </ul>
+);
+
+//转换后
+"use strict";
+
+var element = React.createElement(
+  "ul",
+  null,
+  [
+    React.createElement("li",{ key: 1 },"1:Github"), 
+    React.createElement("li",{ key: 2 },"2:CSDN")
+  ]
+);
+```
+由babel转换后React.createElement中的代码可以看出，key在其它元素中之所以不必须是因为不管组件的state或者props如何变化，这些元素始终占据着React.createElement固定的位置，这个位置就是天然的key。
+而由数组创建的组件可能由于动态的操作导致重新渲染时，子组件的位置发生了变化，例如上面列表中新增一项，上面两项的位置可能变化为下面这样：
+```javascript
+var element = React.createElement(
+  "ul",
+  null,
+  [
+    React.createElement("li",{ key: 3 },"1:StackOverflow"), 
+    React.createElement("li",{ key: 1 },"2:Github"), 
+    React.createElement("li",{ key: 2 },"3:CSDN")
+  ]
+);
+```
+可以看出，数组创建子组件的位置并不固定，是动态改变的。这样有了key属性后，react就可以根据key值来判断是否为同一组件。
+
+> 还有一种比较常见的场景是：为一个有复杂繁琐逻辑的组件添加key后，后续操作可以改变该组件的key属性值，从而达到先销毁之前的组件，再重新创建该组件的目的。
+
+关于key属性更多详细信息，参见[React之Key详解](https://segmentfault.com/a/1190000009149186)
 
 ### 9. 事件处理
 
