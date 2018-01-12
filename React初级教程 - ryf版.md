@@ -21,10 +21,9 @@
 7. [PropTypes类型检查](#7-proptypes类型检查)
 8. [列表 & Keys](#8-列表--keys)
 9. [事件处理](#9-事件处理)
-10. [条件渲染](#10-条件渲染)
-11. [表单](#11-表单)
-12. [组合 & 继承](#12-组合--继承)
-13. 其他
+10. [表单](#10-表单)
+11. [组合 & 继承](#11-组合--继承)
+12. 其他
 <br/><br/>
 
 ## 正文
@@ -320,6 +319,10 @@ ReactDOM.render(
   document.getElementById('example')
 )
 ```
+需要注意的是，由于 this.refs.[refName] 属性获取的是真实 DOM ，所以必须等到虚拟 DOM 插入文档以后，才能使用这个属性，否则会报错。
+
+上面代码中，通过为组件指定 Click 事件的回调函数，确保了只有等到真实 DOM 发生 Click 事件之后，才会读取 this.refs.[refName] 属性。
+
 此外，也可以使用 [**getDOMNode()**](https://segmentfault.com/q/1010000006198939) 方法获取DOM元素。
 
 更多关于 Refs 的内容，参见[官方文档](https://doc.react-china.org/docs/refs-and-the-dom.html)。
@@ -545,16 +548,41 @@ var element = React.createElement(
 
 > 还有一种比较常见的场景是：为一个有复杂繁琐逻辑的组件添加key后，后续操作可以改变该组件的key属性值，从而达到先销毁之前的组件，再重新创建该组件的目的。
 
-关于key属性更多详细信息，参见[React之Key详解](https://segmentfault.com/a/1190000009149186)
+关于key属性更多详细信息，参见[React之Key详解](https://segmentfault.com/a/1190000009149186)。
 
 ### 9. 事件处理
+React元素的事件处理和DOM元素的相似，但有语法上的不同。
+- React事件绑定属性的命名采用驼峰式命名，不是小写
+- 如果采用JSX的语法，需要传入一个函数作为事件处理函数，而不是一个字符串（DOM元素的写法）
+```javascript
+//传统的HTML
+<button onclick="activateLasers()">
+  //...
+</button>
+
+//React中的事件绑定
+<button onClick={activateLasers}>
+  //...
+</button>
+```
+- 不能使用 return false 的方式阻止默认行为，必须明确的使用 preventDefault
+```javascript
+handleClick = (e) => {      //ES6箭头函数
+  e.preventDefault();       //react中阻止默认行为的方法
+  this.setState({
+    value: 'value2'
+  });
+  console.log('The link was clicked.');
+}
+```
+React 组件支持很多事件，除了 Click 事件外，还有 KeyDown 、Copy、Scroll 等，详细事件清单参见官方文档[支持的事件](https://doc.react-china.org/docs/events.html#支持的事件)。
+
+### 10. 表单
 
 
-### 10. 条件渲染
 
 
-### 11. 表单
 
 
-### 12. 组合 & 继承
+### 11. 组合 & 继承
 
