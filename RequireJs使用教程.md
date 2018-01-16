@@ -88,7 +88,7 @@ require(['jquery','underscore','backbone'], function($, _, Backbone){
 上面的示例中主模块依赖['jquery','underscore','backbone']，默认情况下require假定这三个模块与main.js在同一个目录下，文件名分别是 jquery.js、underscore.js、backbone.js，然后自动加载。
 
 #### require.config()
-使用require.config()方法可以自定义模块的加载，它位于主模块main.js头部，接受一个对象类型的参数，改参数的path属性指定各个模块的加载路径。
+使用require.config()方法可以自定义模块的加载，它位于主模块main.js头部，接受一个对象类型的参数，该参数的path属性指定各个模块的加载路径。
 ```javascript
 require.config({
     paths:{
@@ -108,22 +108,84 @@ require.config({
         'backbone': 'backbone'
     }
 });
+//
+require(['jquery','a'], function($){
+    $(function(){
+        alert('...');
+    })
+})
 ```
-如果需要加载的js来自本地服务器、其他网站或CDN，可以这样配置：
+如果需要加载的js来自本地服务器、其他网站或CDN，则可以配置一个链接地址：
 ```javascript
 require.config({
     paths: {
         'jquery': 'http://libs.baidu.com/jquery/2.0.3/jquery',
         //...
     }
+});
+//
+require(['jquery','a'], function($){
+    $(function(){
+        alert('...');
+    })
 })
 ```
+require.js还可以通过paths参数配置多个路径。在上例中若远程cdn库没有加载成功，可以加载本地库，如：
+```javascript
+require.config({
+    paths: {
+        'jquery': ['http://libs.baidu.com/jquery/2.0.3/jquery', 'js/module/jquery'],
+        //...
+    }
+});
+```
+
+4. **加载AMD规范的模块**
+通过require.js加载的模块都需要符合AMD规范，也就是说，模块必须采用特定的 define() 函数定义。如果一个模块不依赖于其他模块，则可以直接定义在 define() 函数中。
+
+比如现在有一个 math.js 文件，它定义了一个 math 模块，那么 math.js 就要这样写：
+```javascript
+// math.js
+define(function(){
+    var add = function(x, y){
+        return x + y;
+    };
+    return {
+        add: add
+    };
+    
+});
+```
+加载方法如下：
+```javascript
+// math.js
+require(['math'], function(math){
+    alert(math.add(1, 1));
+})
+```
+<br/>
+
+如果这个模块还依赖其他模块，那么 define() 函数的第一个参数必须是一个数组，指明该模块的依赖性：
+```javascript
+define(['module'], function(module){
+    function foo(){
+        module.doSomething();
+        //...
+    }
+    return {
+        foo: foo
+    };
+});
+```
+当 require() 函数加载上面这个模块的时候，就会先加载 module.js 文件。
+
+5. **加载非AMD规范的模块**
 
 
-- 全局配置
 
 
-- 第三方模块
+
+
 
 
 
