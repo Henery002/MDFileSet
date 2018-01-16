@@ -182,11 +182,67 @@ define(['module'], function(module){
 
 5. **加载非AMD规范的模块**
 
+一般来说 require.js 加载的模块必须是符合AMD规范、用 define() 函数定义的模块，但是实际上有很多函数库并不符合AMD规范（jquery符合），那么require.js该如何加载非规范的模块呢？
 
+#### shim 属性
 
+非AMD规范的模块在使用 require() 函数加载之前要先用 require.config() 方法定义它们的一些特征。
 
+比如 underscore 和 backbone 库都没有采用AMD规范编写，那么如果要加载它们，就必须先定义它们的特征。
+```javascript
+require.config({
+    shim: {
+        'underscore': {
+            exports: '_'
+        },
+        'backbone': {
+            deps: ['underscore', 'jquery'],
+            exports: 'backbone'
+        }
+    }
+});
+```
+在这里 require.config() 接收一个配置对象，这个对象除了有 paths 属性之外，还有另一个属性 shim ，专门用来配置不兼容模块。
 
+具体来说每个模块都要定义：
+- exports 值。输出的变量名，表明这个模块外部调用时的名称
+- deps 数组。表明该模块的依赖性
 
+举个例子，jquery的插件可以这样定义：
+```javascript
+require.config({
+    shim: {
+        'jquery.scroll': {
+            deps: ['jquery'],
+            exports: 'jquery.fn.scroll'
+        }
+    }
+});
+```
+<br/>
 
+### require.js插件
 
+require.js还提供了一系列插件，实现一些特定的功能。
 
+- domready插件。可以让回调函数在页面DOM结构加载完成后再运行
+```javascript
+require(['domeready!'], function(doc){
+    /*
+     * called once the DOM is ready.
+    */
+})
+```
+- text/image插件。允许require.js加载文本和图片文件
+```javascript
+define([
+    'text!file2.txt',
+    'image!pic2.jpg'
+    ],
+    function(file2, pic2){
+        console.log(file2);
+        document.body.appendChild(pic2);
+    }
+);
+```
+类似的插件还有很多，如 json : 用于加载json文件、mdown : 用于加载markdown文件。
