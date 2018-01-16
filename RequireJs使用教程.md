@@ -1,10 +1,12 @@
 
-## RequireJs使用教程
+## RequireJs介绍及使用
 > 参考：http://www.runoob.com/w3cnote/requirejs-tutorial-1.html
 
 <br/><br/>
 
 ### 什么是require.js
+
+先看看官网对 require.js 的定义：
 
 > RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Rhino and Node. Using a modular script loader like RequireJS will improve the speed and quality of your code.
 
