@@ -11,7 +11,7 @@
 > 参考文章：http://www.ruanyifeng.com/blog/2015/03/react 、http://www.runoob.com/react/react-tutorial.html <br/>
 > 时    间：2018/01
 
-> 转载请注明出处
+> 转载请注明出处。
 
 <br/><br/>
 

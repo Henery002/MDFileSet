@@ -4,7 +4,7 @@
 > 时    间：2018/01/14 <br/>
 > 参考文章：http://www.runoob.com/w3cnote/requirejs-tutorial-1.html
 
-> 转载请注明出处
+> 转载请注明出处。
 
 <br/><br/>
 
