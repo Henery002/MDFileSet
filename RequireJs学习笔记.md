@@ -1,6 +1,7 @@
 
 ## RequireJs介绍及使用
-> 参考：http://www.runoob.com/w3cnote/requirejs-tutorial-1.html
+> 2018/01/14 <br/>
+> 参考文章：http://www.runoob.com/w3cnote/requirejs-tutorial-1.html
 
 <br/><br/>
 
