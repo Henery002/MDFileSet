@@ -3,7 +3,7 @@
 > 时    间：2017/12/17  
 > 参考文章：Less官方网站[lesscss.cn](http://lesscss.cn/features/)
 
-> 转载请注明出处
+> 转载请注明出处。
 <br/>
 
 ## 目录：
