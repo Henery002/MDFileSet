@@ -1,6 +1,7 @@
 
 ## RequireJs介绍及使用
-> 2018/01/14 <br/>
+> 作    者：Henery(henery_002@163.com) <br/>
+> 时    间：2018/01/14 <br/>
 > 参考文章：http://www.runoob.com/w3cnote/requirejs-tutorial-1.html
 
 <br/><br/>

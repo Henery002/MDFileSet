@@ -1,6 +1,7 @@
 ## Less 学习笔记
-> 2017/12/17  
-> 参考文章：[Less中文网（lesscss.cn）](http://lesscss.cn/features/)
+> 作    者：Henery(henery_002@163.com) <br/>
+> 时    间：2017/12/17  
+> 参考文章：Less官方网站[lesscss.cn](http://lesscss.cn/features/)
 
 ### 简介
 css的语法相对简单，对使用者的要求较低，但同时也带来一些问题：css是一门非程序式语言，没有变量、函数、scope（作用域）等概念，因此需要书写大量看似没有逻辑的代码，不方便维护及扩展，不利于复用，很难写出组织良好且易于维护的css代码。
