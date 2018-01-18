@@ -3,6 +3,9 @@
 > 作    者：Henery(henery_002@163.com) <br/>
 > 时    间：2018/01/14 <br/>
 > 参考文章：http://www.runoob.com/w3cnote/requirejs-tutorial-1.html
+
+> 转载请注明出处
+
 <br/><br/>
 
 ## 目录：
