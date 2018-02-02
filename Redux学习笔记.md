@@ -15,11 +15,11 @@
 
 <br/><br/>
 
-## 正文
+## 正文分支测试内容
 ### 关于Redux
 #### 1. 核心概念
 
-在Redux中，当使用普通对象俩描述运用的state时，例如：todo应用的state可能长这样：
+在Redux中，当使用普通对象来描述应用的state时，例如：todo应用的state可能长这样：
 ```jajascript
 {
     todos:[{
