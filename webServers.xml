@@ -9,7 +9,15 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
-      <webServer id="d72e7945-1357-4a37-b5c6-cd180a8013c6" name="d-vault" url="http://192.168.3.24">
+      <webServer id="d72e7945-1357-4a37-b5c6-cd180a8013c6" name="d-vault (1)" url="http://192.168.3.24">
+        <fileTransfer host="192.168.3.24" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="fb34c5d6-e06e-473c-9163-5986f9efb5bd" name="d-vault" url="http://192.168.3.24">
         <fileTransfer host="192.168.3.24" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
