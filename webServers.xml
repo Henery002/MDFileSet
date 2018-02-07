@@ -1,8 +1,8 @@
 <application>
   <component name="WebServers">
     <option name="servers">
-      <webServer id="30d71d82-79e6-4904-bf96-928d472d9559" name="d-vault" url="http://192.168.3.24">
-        <fileTransfer host="192.168.3.24" port="22" accessType="SFTP">
+      <webServer id="30d71d82-79e6-4904-bf96-928d472d9559" name="d-vault" url="http://192.168.1.221">
+        <fileTransfer host="192.168.1.221" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
