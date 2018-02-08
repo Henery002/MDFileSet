@@ -33,6 +33,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="3006e602-3e35-49d3-8443-74c2d9c71688" name="d-vault" url="http://192.168.3.24">
+        <fileTransfer host="192.168.3.24" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </application>
