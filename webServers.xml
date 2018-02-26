@@ -49,7 +49,15 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
-      <webServer id="ca934286-158f-4de7-93f9-e44195e2b63f" name="d-vault" url="http://192.168.3.24">
+      <webServer id="ca934286-158f-4de7-93f9-e44195e2b63f" name="d-vault (6)" url="http://192.168.3.24">
+        <fileTransfer host="192.168.3.24" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="7fbc2986-1f52-4aff-babe-cbf7facc5797" name="react-router" url="http://192.168.3.24">
         <fileTransfer host="192.168.3.24" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
