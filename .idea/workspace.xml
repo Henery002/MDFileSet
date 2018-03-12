@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05cb500b-136d-4d24-b976-2f38e93a262a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Webpack学习笔记.md" />
-      <change beforePath="$PROJECT_DIR$/ide.general.xml" afterPath="$PROJECT_DIR$/ide.general.xml" />
-      <change beforePath="$PROJECT_DIR$/usageView.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/webServers.xml" afterPath="$PROJECT_DIR$/webServers.xml" />
+      <change beforePath="$PROJECT_DIR$/Webpack学习笔记.md" afterPath="$PROJECT_DIR$/Webpack学习笔记.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +17,8 @@
         <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="231">
-                <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <first_editor relative-caret-position="105">
+                <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -146,7 +143,7 @@
       <workItem from="1515490694254" duration="2680000" />
       <workItem from="1515552864777" duration="1888000" />
       <workItem from="1515634341816" duration="140000" />
-      <workItem from="1520822342418" duration="412000" />
+      <workItem from="1520822342418" duration="759000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1515480159180</created>
@@ -180,7 +177,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25838000" />
+    <option name="totallyTimeSpent" value="26185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -404,8 +401,8 @@
     <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="231">
-            <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <first_editor relative-caret-position="105">
+            <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
             <folding />
           </first_editor>
           <second_editor>
