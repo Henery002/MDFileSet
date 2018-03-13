@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05cb500b-136d-4d24-b976-2f38e93a262a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Webpack学习笔记.md" afterPath="$PROJECT_DIR$/Webpack学习笔记.md" />
+      <change beforePath="$PROJECT_DIR$/webServers.xml" afterPath="$PROJECT_DIR$/webServers.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +19,8 @@
         <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="174">
-                <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+              <first_editor relative-caret-position="291">
+                <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -32,8 +34,8 @@
         <entry file="file://$PROJECT_DIR$/Redux学习笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-2835">
-                <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+              <first_editor relative-caret-position="399">
+                <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -47,8 +49,8 @@
         <entry file="file://$PROJECT_DIR$/React入门笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="84">
-                <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <first_editor relative-caret-position="336">
+                <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -90,7 +92,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="width" value="814" />
     <option name="height" value="867" />
@@ -173,7 +175,8 @@
       <workItem from="1515490694254" duration="2680000" />
       <workItem from="1515552864777" duration="1888000" />
       <workItem from="1515634341816" duration="140000" />
-      <workItem from="1520822342418" duration="8701000" />
+      <workItem from="1520822342418" duration="10732000" />
+      <workItem from="1520925905177" duration="2447000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1515480159180</created>
@@ -207,10 +210,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34127000" />
+    <option name="totallyTimeSpent" value="38605000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-7" y="0" width="814" height="867" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -251,85 +254,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="84">
-            <caret line="4" column="77" lean-forward="false" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="4032">
-            <caret line="192" column="3" lean-forward="false" selection-start-line="192" selection-start-column="3" selection-end-line="192" selection-end-column="3" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="84">
-            <caret line="4" column="77" lean-forward="false" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="4032">
-            <caret line="192" column="3" lean-forward="true" selection-start-line="192" selection-start-column="3" selection-end-line="192" selection-end-column="3" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="3381">
-            <caret line="161" column="10" lean-forward="true" selection-start-line="161" selection-start-column="10" selection-end-line="161" selection-end-column="10" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="84">
-            <caret line="4" column="77" lean-forward="false" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
+    <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="0">
@@ -342,11 +267,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md">
+    <entry file="file://$PROJECT_DIR$/Redux学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <first_editor relative-caret-position="399">
+            <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
             <folding />
           </first_editor>
           <second_editor>
@@ -355,45 +280,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="535" column="32" lean-forward="true" selection-start-line="535" selection-start-column="32" selection-end-line="535" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/React入门笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="84">
-            <caret line="4" column="77" lean-forward="false" selection-start-line="4" selection-start-column="77" selection-end-line="4" selection-end-column="77" />
+          <first_editor relative-caret-position="336">
+            <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
@@ -402,19 +293,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="4032">
-            <caret line="192" column="3" lean-forward="false" selection-start-line="192" selection-start-column="3" selection-end-line="192" selection-end-column="3" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React入门教程笔记.md" />
+    <entry file="file://$PROJECT_DIR$/React初级教程 - ryf版.md" />
     <entry file="file://$PROJECT_DIR$/Less学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
@@ -431,8 +333,8 @@
     <entry file="file://$PROJECT_DIR$/Redux学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-2835">
-            <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+          <first_editor relative-caret-position="399">
+            <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
             <folding />
           </first_editor>
           <second_editor>
@@ -444,8 +346,8 @@
     <entry file="file://$PROJECT_DIR$/React入门笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="84">
-            <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <first_editor relative-caret-position="336">
+            <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
@@ -457,8 +359,8 @@
     <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="174">
-            <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <first_editor relative-caret-position="291">
+            <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
