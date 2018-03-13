@@ -121,17 +121,42 @@ webpack { entry file } { destination for bundled file }
 # webpack非全局安装的情况
 node_modules/.bin/webpack app/main,js public/bundle.js
 ```
-执行结果如下：
-![打包结果](./src/img/webpack01.png)
+执行结果如下：<br/>
+![打包执行结果](./src/img/webpack01.png)<br/>
+可以看到webpack同时编译了main.js和Greeter.js。现在在浏览器中打开index.html文件，可以看到正常的页面：<br/>
+![页面](./src/img/webpack02.jpg)<br/>
+至此，已经成功使用webpack进行文件打包。但是在命令行中执行如此复杂的操作并不方便，且容易出错。
 
-
-
-
-
+下面来看webpack的另一种更常用的打包方法。
 
 #### 2.4 通过配置文件使用Webpack
+webpack拥有很多其他高级功能，如后文将要讲述的loaders和plugins，这些功能都可以通过命令行模式实现，但是这样不方便并且易出错。更好的办法是定义一个配置文件（该配置文件也是一个javascript模块），将所有与打包相关的信息放在里面。
+
+在当前根目录下新建一个webpack.config.js文件，写入简单的配置代码：
+```
+module.exports = {
+    entry: __dirname + "/app/main.js",    //唯一入口文件
+    output: {
+        path: __dirnmae + "/public",      //打包后文件的存放位置
+        filename: "bundle.js"             //打包后输出文件的文件名
+    }
+}
+```
+> 注："__dirname"是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
+
+webpack.config.js文件配置好后，再进行打包操作时，只需要执行
+```
+webpack (非全局安装时需要执行 node_modules/.bin/webpack)
+```
+即可，该目录会自动引用webpack.config.js文件中的配置选项。<br/>
+![打包2](./src/img/webpack03.jpg)<br/>
+这样一来，不用再使用繁琐的打包参数就能够打包。
+
+事实上，还有一种更便捷的执行打包方式，连 webpack(非全局安装时使用node_modules/.bin/webpack)命令都不需要使用。
 
 #### 2.5 快捷打包方式
+
+
 
 
 <br/><br/>

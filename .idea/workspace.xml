@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05cb500b-136d-4d24-b976-2f38e93a262a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Webpack学习笔记.md" afterPath="$PROJECT_DIR$/Webpack学习笔记.md" />
-      <change beforePath="$PROJECT_DIR$/webServers.xml" afterPath="$PROJECT_DIR$/webServers.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +17,8 @@
         <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="291">
-                <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+              <first_editor relative-caret-position="438">
+                <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -176,7 +174,7 @@
       <workItem from="1515552864777" duration="1888000" />
       <workItem from="1515634341816" duration="140000" />
       <workItem from="1520822342418" duration="10732000" />
-      <workItem from="1520925905177" duration="2447000" />
+      <workItem from="1520925905177" duration="4425000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1515480159180</created>
@@ -210,7 +208,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38605000" />
+    <option name="totallyTimeSpent" value="40583000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="814" height="867" extended-state="0" />
@@ -359,8 +357,8 @@
     <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="291">
-            <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+          <first_editor relative-caret-position="438">
+            <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
