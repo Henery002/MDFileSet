@@ -17,8 +17,8 @@
         <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="438">
-                <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+              <first_editor relative-caret-position="142">
+                <caret line="73" column="17" lean-forward="true" selection-start-line="73" selection-start-column="17" selection-end-line="73" selection-end-column="17" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -69,6 +69,7 @@
       <find>3 ###</find>
       <find>4 ###</find>
       <find>###</find>
+      <find>如果</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,7 +175,7 @@
       <workItem from="1515552864777" duration="1888000" />
       <workItem from="1515634341816" duration="140000" />
       <workItem from="1520822342418" duration="10732000" />
-      <workItem from="1520925905177" duration="4425000" />
+      <workItem from="1520925905177" duration="4871000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1515480159180</created>
@@ -208,7 +209,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40583000" />
+    <option name="totallyTimeSpent" value="41029000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="814" height="867" extended-state="0" />
@@ -357,8 +358,8 @@
     <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="438">
-            <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+          <first_editor relative-caret-position="142">
+            <caret line="73" column="17" lean-forward="true" selection-start-line="73" selection-start-column="17" selection-end-line="73" selection-end-column="17" />
             <folding />
           </first_editor>
           <second_editor>

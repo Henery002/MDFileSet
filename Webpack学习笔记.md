@@ -68,13 +68,13 @@ npm install --save-dev webpack
 此时项目结构如下所示：
 ```
 react-router
-  |__node_modules
-  |__app
-     |__Greeter.js
-     |__main.js
-  |__public
-     |__index.html
-  |__package.json
+  |___node_modules
+  |___app
+  |   |___Greeter.js
+  |   |___main.js
+  |___public
+  |   |___index.html
+  |___package.json
 ```
 我们可以在index.html中写入基础的html代码，目的在于引入打包后的js文件（bundle.js，后面将详述）。
 ```html
@@ -116,7 +116,7 @@ document.querySelector('#root').appendChild(greeter());
 # 填写路径的时候不用添加{ }，如：
 webpack { entry file } { destination for bundled file }
 ```
-在指定了入口文件后，webpack将自动识别项目所依赖的其他文件，不过需要注意的是如果webpack不是全局安装的话，在使用该命令时需要制定其在 node_modules 中的地址，如：
+在指定了入口文件后，webpack将自动识别项目所依赖的其他文件，不过需要注意的是**如果webpack不是全局安装的话，在使用该命令时需要制定其在 node_modules 中的地址**，如：
 ```
 # webpack非全局安装的情况
 node_modules/.bin/webpack app/main,js public/bundle.js
@@ -125,7 +125,7 @@ node_modules/.bin/webpack app/main,js public/bundle.js
 ![打包执行结果](./src/img/webpack01.png)<br/>
 可以看到webpack同时编译了main.js和Greeter.js。现在在浏览器中打开index.html文件，可以看到正常的页面：<br/>
 ![页面](./src/img/webpack02.jpg)<br/>
-至此，已经成功使用webpack进行文件打包。但是在命令行中执行如此复杂的操作并不方便，且容易出错。
+至此，已经成功使用webpack进行文件打包。**但是在命令行中执行如此复杂的操作并不方便，且容易出错**。
 
 下面来看webpack的另一种更常用的打包方法。
 
@@ -154,7 +154,7 @@ webpack (非全局安装时需要执行 node_modules/.bin/webpack)
 
 事实上，还有一种更便捷的执行打包方式，连 webpack(非全局安装时使用node_modules/.bin/webpack)命令都不需要使用。
 
-#### 2.5 快捷打包方式
+#### 2.5 更快捷的打包方式
 
 
 
