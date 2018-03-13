@@ -116,7 +116,7 @@ document.querySelector('#root').appendChild(greeter());
 # 填写路径的时候不用添加{ }，如：
 webpack { entry file } { destination for bundled file }
 ```
-在指定了入口文件后，webpack将自动识别项目所依赖的其他文件，不过需要注意的是**如果webpack不是全局安装的话，在使用该命令时需要制定其在 node_modules 中的地址**，如：
+在指定了入口文件后，webpack将自动识别项目所依赖的其他文件，不过需要注意的是**如果webpack不是全局安装的话，在使用该命令时需要指定其在 node_modules 中的地址**，如：
 ```
 # webpack非全局安装的情况
 node_modules/.bin/webpack app/main,js public/bundle.js
@@ -155,6 +155,25 @@ webpack (非全局安装时需要执行 node_modules/.bin/webpack)
 事实上，还有一种更便捷的执行打包方式，连 webpack(非全局安装时使用node_modules/.bin/webpack)命令都不需要使用。
 
 #### 2.5 更快捷的打包方式
+在命令行中输入上述 node_modules/.bin/webpack 命令较为繁琐，不过好在npm可以引导任务的执行，对npm进行配置后可以在命令行中使用简单的 npm start 命令来代替上面略微繁琐的命令。
+
+在 package.json 中对scripts对象进行相关设置即可，方法如下：
+```javascript
+{
+    "name": "webpack-sample-project",
+    "version": "1.0.0",
+    "description": "Sample webpack project",
+    "scripts": {
+        "start": "webpack"    //修改此处。json文件不支持注释，所以在引用时务必清除
+    },
+    "author": "...",
+    "lisence": "ISC",
+    "devDependencies": {
+        "webpack": "3.10.0"
+    }
+}
+```
+> 注：package.json中的scripts会按照一定的顺序寻找命令对应的位置，本地的 node_modules/.bin 路径就在这个寻找的清单中，所以无论是全局安装还是局部安装的webpack，都不再需要在webpack前面指明详细的路径。
 
 
 
