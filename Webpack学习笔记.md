@@ -10,10 +10,11 @@
 1. [认识Webpack](#1-认识webpack)
 2. [使用Webpack](#2-使用webpack)
 3. [Webpack的强大功能](#3-webpack的强大功能)
-4. [babel](#4-babel)
+4. [Babel](#4-babel)
 5. [模块化思想](#5-模块化思想)
 6. [插件](#6-插件)
-7.
+7. [产品阶段的构建](#7-产品阶段的构建)
+8.
 
 
 <br/><br/>
@@ -175,10 +176,54 @@ webpack (非全局安装时需要执行 node_modules/.bin/webpack)
 ```
 > 注：package.json中的scripts会按照一定的顺序寻找命令对应的位置，本地的 node_modules/.bin 路径就在这个寻找的清单中，所以无论是全局安装还是局部安装的webpack，都不再需要在webpack前面指明详细的路径。
 
+npm的start命令是一个特殊的脚本命令，其特殊性表现在：在命令行中使用 npm start 就可以执行器对应的命令，如果对应的此脚本名称不是start，想要在命令行中运行时，需要使用 npm run { script name } 如 npm run build。当在命令行中输入 npm start 时，输出结果如下：<br/>
+![npm start](./src/img/webpack04-1.png)<br/>
+![npm start](./src/img/webpack04.jpg)<br/>
+（图二为自己实战测试截图，但发现无法使用本地8080端口访问，原因暂不详）
 
+现在只需要使用 npm start 就可以打包文件了。
 
+如果想充分发挥webpack的强大功能，还可以修改配置文件的其他选项。下文详述。
 
 <br/><br/>
 
 ### 3. Webpack的强大功能
-#### 3.1
+#### 3.1 生成Source Maps（便于调试）
+开发总是离不开调试，方便的调试能极大的提高开发效率，不过有时通过打包后的文件不易找到出错的地方对应的代码的位置，Source Maps就是来帮我们解决这个问题的。
+
+通过简单的配置，webpack就可以在打包时生成source maps，提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。
+
+在webpack的配置文件中配置source maps，需要配置devtool。它有一下四种不同的配置选项，优缺点如下：
+
+| devtool | 配置结果 |
+| - | - |
+| source-map | 在一个单独的文件中产生一个完整且功能完全的文件。该文件具有最好的source map，但他会减慢打包速度 |
+
+
+#### 3.2 使用Webpack构建本地服务器
+
+#### 3.3 Loaders
+
+<br/><br/>
+
+### 4. Babel
+
+#### 4.1 Babel的安装与配置
+
+#### 4.2 Babel的配置
+
+<br/><br/>
+
+### 5. 模块化思想
+
+#### 5.1 css
+
+#### 5.2 CSS module
+
+#### 5.3 CSS预处理器
+
+<br/><br/>
+
+### 6. 插件（Plugins）
+
+#### 6.1
