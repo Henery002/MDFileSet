@@ -52,13 +52,13 @@ npm install --save-dev webpack
 
 #### 2.2 准备工作
 1. 在上述文件夹中创建一个package.json文件，这是一个标准的npm说明文件，内容包括当前项目的依赖模块、自定义的脚本任务等。也可以使用 npm init 命令自动创建 package.json 文件。
-```
+```javascript
 npm init
 ```
 执行完该命令后，系统会提示填写一系列诸如项目名称、项目描述、作者等信息，这些内容可以默认不填写，回车。
 
 2. package.json文件生成后，开始在本项目中安装webpack作为依赖包：
-```
+```javascript
 //安装webpack
 npm install --save-dev webpack
 ```
@@ -67,7 +67,7 @@ npm install --save-dev webpack
 - Greeter.js    放在ap文件夹中
 - main.js       放在app文件夹中
 此时项目结构如下所示：
-```
+```javascript
 react-router
   |___node_modules
   |___app
@@ -103,7 +103,7 @@ module.exports = function() {
 };
 ```
 main.js中写入下述代码，用以把Greeter模块返回的节点插入到页面。
-```
+```javascript
 // main.js
 const greeter = require('./Greeter.js');
 document.querySelector('#root').appendChild(greeter());
@@ -111,14 +111,14 @@ document.querySelector('#root').appendChild(greeter());
 
 #### 2.3 开始使用Webpack打包
 在命令行中webpack的使用方式如下：
-```
+```javascript
 # { extry file }    填写入口文件的路径，本文中就是上述main.js的路径，
 # { destination for bundled file }    填写打包文件的存放路径
 # 填写路径的时候不用添加{ }，如：
 webpack { entry file } { destination for bundled file }
 ```
 在指定了入口文件后，webpack将自动识别项目所依赖的其他文件，不过需要注意的是**如果webpack不是全局安装的话，在使用该命令时需要指定其在 node_modules 中的地址**，如：
-```
+```javascript
 # webpack非全局安装的情况
 node_modules/.bin/webpack app/main,js public/bundle.js
 ```
@@ -134,7 +134,7 @@ node_modules/.bin/webpack app/main,js public/bundle.js
 webpack拥有很多其他高级功能，如后文将要讲述的loaders和plugins，这些功能都可以通过命令行模式实现，但是这样不方便并且易出错。更好的办法是定义一个配置文件（该配置文件也是一个javascript模块），将所有与打包相关的信息放在里面。
 
 在当前根目录下新建一个webpack.config.js文件，写入简单的配置代码：
-```
+```javascript
 module.exports = {
     entry: __dirname + "/app/main.js",    //唯一入口文件
     output: {
@@ -146,7 +146,7 @@ module.exports = {
 > 注："__dirname"是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
 
 webpack.config.js文件配置好后，再进行打包操作时，只需要执行
-```
+```javascript
 webpack (非全局安装时需要执行 node_modules/.bin/webpack)
 ```
 即可，该目录会自动引用webpack.config.js文件中的配置选项。<br/>
@@ -207,7 +207,7 @@ npm的start命令是一个特殊的脚本命令，其特殊性表现在：在命
 对中小型项目来说eval-source-map是一个不错的选择，只应该在开发阶段使用。
 
 我们继续对上文中新建的webpack.config.js进行如下配置：
-```
+```javascript
 module.exports = {
     devtool: 'eval-source-map',
     entry: __dirname + '/app/main.js',
@@ -221,7 +221,7 @@ module.exports = {
 
 #### 3.2 使用Webpack构建本地服务器
 如果想让浏览器同步同步监听代码的修改，并自动刷新显示修改后的结果，那么可以借助webpack搭建本地开发服务器。这个服务器基于node.js构建，可以实现想要的功能。不过他是一个单独的组件，在webpack中进行配置之前要将其作为项目以来单独安装
-```
+```javascript
 npm install --save-dev webpack-dev-server
 ```
 以下是devserver作为webpack配置项的一些配置参数，更多配置参数请参见[官网](https://webpack.js.org/configuration/dev-server/)。
@@ -233,7 +233,7 @@ npm install --save-dev webpack-dev-server
 | historyApiFallback | 在开发单页应用时非常有用。它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html|
 
 把这些命令加到webpack的配置文件中，现在的配置文件webpack.config.js如下所示：
-```
+```javascript
 module.exports = {
     devtool: 'eval-source-map',
     entry: __dirname + '/app/main.js',
@@ -250,7 +250,7 @@ module.exports = {
 }
 ```
 然后再在package.json中的scripts对象中添加如下命令，用以开启本地服务器：
-```
+```javascript
 "scripts": {
     "test": "echo \'Error: no test specified\' && exit 1",
     "start": "webpack",
@@ -272,13 +272,13 @@ Loaders需要单独安装且需要在webpack.config.js中的modules关键字中�
 不过在配置loader之前，我们可以把Greeter.js中的内容放在一个单独的json文件中，并通过合适的配置使Greeter.js可以读取json文件的值。
 
 各文件修改后的代码如下（在根文件夹中创建带有文本内容的json文件，命名为config.json）：
-```
+```javascript
 {
     "greetTxt": "This is my first webpack app"
 }
 ```
 更新后的Greeter.js：
-```
+```javascript
 var config = require('./config.json');
 
 module.exports = function() {
