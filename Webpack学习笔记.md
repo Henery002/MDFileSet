@@ -198,15 +198,101 @@ npm的start命令是一个特殊的脚本命令，其特殊性表现在：在命
 | devtool | 配置结果 |
 | - | - |
 | source-map | 在一个单独的文件中产生一个完整且功能完全的文件。该文件具有最好的source map，但他会减慢打包速度 |
+| cheap-module-source-map | 在一个单独的文件中生成一个不带列映射的map，不带列映射提高了打包速度，但也使得浏览器开发者工具只能对应到具体的行，不能对应到具体的列（符号），会对调试造成不便 |
+| eval-source-map | 使用eval打包源文件模块，在同一个文件中生成干净完整的source map。该选项可以在不影响构建速度的前提下生成完整的source-map，但对打包后输出的js文件的执行具有性能和安全的隐患。适合于开发阶段，不适合于生产阶段 |
+| cheap-module-eval-source-map | 在打包文件时生成source map最快的方法。生成的source map会和打包后的js文件同行显示，没有列映射，和eval-source-map选项具有相似的缺点 |
 
+上述选项由上到下打包速度越来越快，不过同时也具有越多的负面作用，较快的打包速度的后果就是对打包后文件的执行有一定影响。
+
+对中小型项目来说eval-source-map是一个不错的选择，只应该在开发阶段使用。
+
+我们继续对上文中新建的webpack.config.js进行如下配置：
+```
+module.exports = {
+    devtool: 'eval-source-map',
+    entry: __dirname + '/app/main.js',
+    output: {
+        path: __dirname + '/public',
+        filename: 'bundle.js'
+    }
+}
+```
+> 注：cheap-module-eval-source-map方法构建速度更快，但不利于调试。推荐在大型项目考虑时间成本时使用。
 
 #### 3.2 使用Webpack构建本地服务器
+如果想让浏览器同步同步监听代码的修改，并自动刷新显示修改后的结果，那么可以借助webpack搭建本地开发服务器。这个服务器基于node.js构建，可以实现想要的功能。不过他是一个单独的组件，在webpack中进行配置之前要将其作为项目以来单独安装
+```
+npm install --save-dev webpack-dev-server
+```
+以下是devserver作为webpack配置项的一些配置参数，更多配置参数请参见[官网](https://webpack.js.org/configuration/dev-server/)。
+
+| devserver的配置选项 | 功能描述 |
+| contentBase | 默认webpack-dev-server会为根文件夹提供本地服务器。如果想为另一个目录下的文件提供本地服务器，应该在这里设置其所在目录（本例中设置到"public"目录） |
+| port | 设置默认监听端口。如果省略，默认为8080 |
+| inline | 设置为true，当源文件改变时会自动刷新 |
+| historyApiFallback | 在开发单页应用时非常有用。它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html|
+
+把这些命令加到webpack的配置文件中，现在的配置文件webpack.config.js如下所示：
+```
+module.exports = {
+    devtool: 'eval-source-map',
+    entry: __dirname + '/app/main.js',
+    output: {
+        path: __dirname + 'public',
+        filename: 'bundle.js'
+    },
+
+    devServer: {
+        contentBase: './public',    //本地服务器所加载的页面所在的目录
+        historyApiFallback: true,   //不跳转
+        inline: true                //实时刷新
+    }
+}
+```
+然后再在package.json中的scripts对象中添加如下命令，用以开启本地服务器：
+```
+"scripts": {
+    "test": "echo \'Error: no test specified\' && exit 1",
+    "start": "webpack",
+    "server": "webpack-dev-server --open"
+},
+```
+现在，在命令行中输入 npm run server ，即可在本地8080端口查看结果。<br/>
+![npm run server](./src/img/webpack05.png)<br/>
 
 #### 3.3 Loaders
+Loaders是webpack提供的非常重要的功能。通过使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式文本的处理。如分析转换scss为css、把es6文件转换为现代浏览器可识别的js文件，对React开发而言，合适的loaders可以把React中用到的JSX文件转换为js文件。
+
+Loaders需要单独安装且需要在webpack.config.js中的modules关键字中进行配置。其配置包括以下方面：
+- test：一个用以匹配loaders所处理的文件的拓展名的正则表达式（必须）
+- loader：loader的名称（必须）
+- include/exclude：手动添加必须处理的文件/文件夹或屏蔽不需要处理的文件/文件夹（可选）
+- query：为loaders提供额外的设置选项（可选）
+
+不过在配置loader之前，我们可以把Greeter.js中的内容放在一个单独的json文件中，并通过合适的配置使Greeter.js可以读取json文件的值。
+
+各文件修改后的代码如下（在根文件夹中创建带有文本内容的json文件，命名为config.json）：
+```
+{
+    "greetTxt": "This is my first webpack app"
+}
+```
+更新后的Greeter.js：
+```
+var config = require('./config.json');
+
+module.exports = function() {
+    var greet = document.createElement('div');
+    greet.textContent = config.greetText;
+    return greet;
+};
+```
+> 注：由于 webpack3.*  / webpack2.* 已经内置可处理json文件，这里就不需要再添加 webpack1.* 需要的json-loader了。在看如何具体使用loader之前不妨先来看看Babel是什么。
 
 <br/><br/>
 
 ### 4. Babel
+
 
 #### 4.1 Babel的安装与配置
 
