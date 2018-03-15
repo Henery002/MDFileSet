@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05cb500b-136d-4d24-b976-2f38e93a262a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Webpack学习笔记.md" afterPath="$PROJECT_DIR$/Webpack学习笔记.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +18,8 @@
         <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-183">
-                <caret line="280" column="13" lean-forward="false" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="13" />
+              <first_editor relative-caret-position="-5358">
+                <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -71,7 +72,11 @@
       <find>###</find>
       <find>如果</find>
       <find>制定</find>
+      <find>&lt;br/&gt;&lt;br/&gt;</find>
     </findStrings>
+    <replaceStrings>
+      <replace>&lt;br/&gt;</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,7 +97,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="width" value="814" />
     <option name="height" value="867" />
@@ -176,7 +181,7 @@
       <workItem from="1515552864777" duration="1888000" />
       <workItem from="1515634341816" duration="140000" />
       <workItem from="1520822342418" duration="10732000" />
-      <workItem from="1520925905177" duration="11825000" />
+      <workItem from="1520925905177" duration="13425000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1515480159180</created>
@@ -210,10 +215,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47983000" />
+    <option name="totallyTimeSpent" value="49583000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-7" y="0" width="814" height="867" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -359,8 +364,8 @@
     <entry file="file://$PROJECT_DIR$/Webpack学习笔记.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-183">
-            <caret line="280" column="13" lean-forward="false" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="13" />
+          <first_editor relative-caret-position="-5358">
+            <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>

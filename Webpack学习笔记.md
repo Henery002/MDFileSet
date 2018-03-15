@@ -11,13 +11,13 @@
 2. [使用Webpack](#2-使用webpack)
 3. [Webpack的强大功能](#3-webpack的强大功能)
 4. [Babel](#4-babel)
-5. [模块化思想](#5-模块化思想)
+5. [模块](#5-模块)
 6. [插件](#6-插件)
 7. [产品阶段的构建](#7-产品阶段的构建)
 8.
 
 
-<br/><br/>
+<br/>
 
 ## 正文：
 ### 1. 认识Webpack
@@ -27,6 +27,7 @@
 - 类似于Typescript这种在Javascript基础上拓展的开发语言：使我们能够实现目前版本的javascript不能直接使用的特性，并且之后还能转换为javascript文件使浏览器可以识别；
 - Scss、Less等css预处理器
 - ......
+
 这些改进提高了开发效率，但是这样开发的文件往往需要进行额外的处理才能让浏览器识别，而手动处理又是很繁琐的事，这就为Webpack类工具的出现提供了需求。
 
 #### 1.2 什么是Webpack
@@ -35,9 +36,9 @@
 #### 1.3 Webpack和Grunt/gulp相比有什么特性
 Gulp/Grunt是一种能够优化前端开发流程的工具，而Webpack是一种模块化的解决方案，不过Webpack的优点使得它在很多场景下可以替代Gulp/Grunt类的工具。<br/>
 Grunt/Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译、组合、压缩等任务的具体步骤，之后工具可以自动完成这些任务。<br/>
-Webpack的工作方式是：把项目当做一个整体，通过一个给定的主文件（如index.js），Webpack将从这个文件开始找到项目所有的依赖文件，使用loaders处理它们，最后打包为一个或多个浏览器可识别的javascript文件。<br/><br/>
+Webpack的工作方式是：把项目当做一个整体，通过一个给定的主文件（如index.js），Webpack将从这个文件开始找到项目所有的依赖文件，使用loaders处理它们，最后打包为一个或多个浏览器可识别的javascript文件。<br/>
 如果实在要把二者进行比较，Webpack的处理速度更快更直接，能打包更多不同类型的文件。
-<br/><br/>
+<br/>
 
 ### 2. 使用Webpack
 在初步了解webpack的工作方式后，开始正式学习使用webpack。
@@ -185,7 +186,7 @@ npm的start命令是一个特殊的脚本命令，其特殊性表现在：在命
 
 如果想充分发挥webpack的强大功能，还可以修改配置文件的其他选项。下文详述。
 
-<br/><br/>
+<br/>
 
 ### 3. Webpack的强大功能
 #### 3.1 生成Source Maps（便于调试）
@@ -289,18 +290,138 @@ module.exports = function() {
 ```
 > 注：由于 webpack3.*  / webpack2.* 已经内置可处理json文件，这里就不需要再添加 webpack1.* 需要的json-loader了。在看如何具体使用loader之前不妨先来看看Babel是什么。
 
-<br/><br/>
+<br/>
 
 ### 4. Babel
+Babel是一个编译javascript代码的平台，它可以帮助开发者：
 
+- 使用最新的javascript代码，如es6、es7，而不需要担心新标准是否被当前浏览器完全支持
+- 使用基于javascript进行了拓展的语言，如JSX
 
 #### 4.1 Babel的安装与配置
+Babel其实是几个模块化的包，其核心功能位于成为babel-core的npm包中。webpack可以把不同的包整合在一起使用，对于每一个需要的功能或拓展，都需要安装单独的包（常用的是用于解析ES6的 babel-env-preset 包和用于解析JSX的 babel-preset-react 包）。
+
+首先一次性安装这些包：
+```javascript
+// npm一次性安装多个依赖模块时，模块之间使用空格隔开
+npm install --save-dev babel-core babel-loader babel-preset-env babel-preset-react
+```
+在webpack中配置Babel的方法如下：
+```javascript
+module.exports = {
+    entry: __dirname + "/app/main.js",      //入口文件
+    output: {
+        path: __dirname + "/public",        //打包文件存放位置
+        filename: "bundle.js"               //打包文件的文件名
+    },
+    devtool: 'eval-source-map',
+    devServer: {
+        contentBase: "./public",            //本地服务器所加载的页面所在目录
+        historyApiFallback: true,           //不跳转
+        inline: true                        //实时刷新
+    },
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {              //babel配置项
+                        presets: [
+                            "env", "react"
+                        ]
+                    }
+                },
+                exclude: /node_modules/
+            }
+        ]
+    }
+};
+```
+如此一来，webpack的配置已经允许使用ES6及JSX语法了，可以继续上文的例子进行测试。
+
+现在我们引入React，使用React做练习测试。
+
+首先安装React和React-DOM：
+```javascript
+npm install --save-dev react react-dom
+```
+下面我们使用ES6语法修改Greeter.js并返回一个React组件：
+```javascript
+// Greeter.js
+import React, {Component} from 'react';
+import config from './config.json';
+
+class Greeter extends Component{
+    render(){
+        return (
+            <div>
+                {config.greetText}
+            </div>
+        );
+    }
+}
+
+export default Greeter;
+```
+然后修改main.js如下，使用ES6的模块定义和渲染Greeter模块：
+```javascript
+// main.js
+import React from 'react';
+import {render} from 'react-dom';
+import {Greeter} from './Greeter.js';
+
+render(
+    <Greeter />,
+    document.getElementById('root');
+);
+```
+最后，重新使用nm start命令打包，打开本地服务器上的页面，会发现和使用babel之前的页面内容是一样的。这说明react和es6已经被正常打包了。
 
 #### 4.2 Babel的配置
+如上所述，Babel可以在webpack.config.js中作配置。但是考虑到babel配置选项的复杂性，一些开发者偏向于把babel配置项单独放在一个名为 .babelrc 的配置文件中。虽然在本项目中目前的babel配置并不复杂，但后续会添加一些内容，因此现在我们将提取出babel的配置项单独配置。
 
-<br/><br/>
+> 注：webpack会自动调用 .babelrc 里的babel配置项。
 
-### 5. 模块化思想
+```
+module.exports = {
+    entry: __dirname + "/app/main.js",          //入口文件
+    output: {
+        path: __dirname + "/public",            //打包后文件存放位置
+        filename: "bundle.js"                   //打包文件的文件名
+    },
+    devtool: 'eval-source-map',
+    devServer: {
+        contentBase: "./public",                //本地服务器所加载的页面所在目录
+        historyApiFallback: true,               //不跳转
+        inline: true                            //实时刷新
+    },
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: {
+                    loader: "babel-loader"
+                },
+                exclude: /node_modules/
+            }
+        ]
+    }
+};
+```
+```
+// .babelrc
+{
+    "preset": ["react", "env"]
+}
+```
+现在看来，对于模块来说，webpack能够提供非常强大的功能，那么哪些是模块呢？
+
+<br/>
+
+### 5. 模块
+
+
 
 #### 5.1 css
 
@@ -308,7 +429,7 @@ module.exports = function() {
 
 #### 5.3 CSS预处理器
 
-<br/><br/>
+<br/>
 
 ### 6. 插件（Plugins）
 
