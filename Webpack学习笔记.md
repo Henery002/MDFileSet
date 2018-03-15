@@ -1,7 +1,7 @@
 ## Webpack学习笔记
-> 作    者：Henery(henery_002@163.com)<br/>
-> 时    间：2018/03/12<br/>
-> 参考文章：
+> author    ：Henery(henery_002@163.com)<br/>
+> time      ：2018/03/12<br/>
+> reference ：
 
 > 转载请注明出处。
 <br/>
