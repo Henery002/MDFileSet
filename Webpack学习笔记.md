@@ -798,7 +798,7 @@ module.exports = {
     ]
 };
 ```
-安装react-tansform-hmr
+安装react-transform-hmr
 ```javascript
 npm install --save-dev babel-plugin-react-transform react-transform-hmr
 ```
@@ -832,19 +832,191 @@ npm install --save-dev babel-plugin-react-transform react-transform-hmr
 <br/>
 
 ### 7. 产品阶段的构建
+到目前为止，已经使用webpack构建了一个完整的开发环境。但是在产品阶段，可能还需要对打包的文件进行额外的处理，如优化、压缩、缓存、分离css和js等等......
+
+对于复杂的项目来说，需要将复杂的配置文件分解成多个小文件。以上述案例为例，我们创建一个webpack.production.config.js文件，配置其基本项，类似于上述案例的原始webpack.config.js文件。
+
+> 注：注意与上述配置参数作对比。
+
+```javascript
+const webpack = require('webpack');
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
+
+module.exports = {
+    entry: __dirname + "/app/main.js",          //入口文件
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle.js"
+    },
+    devtool: null,              //注意此处做了修改，可以大大压缩打包的代码
+    devServer: {
+        contentBase: "./public",                //本地服务器加载的页面所在目录
+        historyApiFallback: true,               //不跳转
+        inline: true,
+        hot: true                               //热加载
+    },
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: { loader: "babel-loader" },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({                //有修改
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader",
+                            options: { modules: true }
+                        },
+                        { loader: "postcss-loader" }
+                    ]
+                })
+            }
+        ]
+    },
+    plugins: [
+        new webpack.BannerPlugin('版权所有，翻版必究'),
+        new HtmlWebpackPlugin({ template: __dirname + '/app/index.tmpl.html' }),        //new一个插件的实例并传入相关参数
+        new webpack.HotModuleReplacementPlugin()            //热加载插件
+    ]
+};
+```
+```javascript
+// package.json
+{
+    "name": "test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack",
+        "server": "webpack-dev-server --open",
+        "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        ...
+    },
+    "dependencies": {
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1"
+    }
+}
+```
+> 注：在windows下build需要配置为"build": "set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress"。
 
 #### 7.1 优化插件
+webpack提供了一些在发布阶段非常有用的优化插件，可以通过npm安装。以下插件可以完成产品发布阶段所需的功能。
+* OccurenceOrderPlugin：为组件分配ID。webpack可以借助此插件分析和优先考虑使用最多的模块，并为它们分配最小的ID
+* UglifyPlugin：压缩js代码
+* ExtractTextPlugin：分离css和js文件
+
+继续以上述案例做演示。上述插件前两个都是内置插件，所以我们只需要安装费内置插件。
+```javascript
+npm install --save-dev extract-text-webpack-plugin
+```
+在webpack.config.js中引用该插件：
+```javascript
+// webpack.production.config.js
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+modules.exports = {
+    entry: __dirname + "/app/main.js",                  //入口文件
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle.js"
+    },
+    devtool: 'none',
+    devServer: {
+        contentBase: "./public",                        //本地服务器加载的页面所在目录
+        historyApiFallback: true,                       //不跳转
+        inline: true,
+        hot: true
+    },
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: { loader: "babel-loader" },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "style-loader" },
+                    {
+                        loader: "css-loader",
+                        options: { modules: true }
+                    },
+                    { loader: "postcss-loader" }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new webpack.BannerPlugin('版权所有，翻版必究'),
+        mew HtmlWebpackPlugin({ template: __dirname + '/app/index.tmpl.html' }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyPlugin(),
+        new ExtractTextPlugin('style.css')
+    ]
+};
+```
+此时再次执行打包命令npm run build，可以看见代码已经被压缩。
 
 #### 7.2 缓存
+使用缓存的最好方法是保证文件名和文件内容是匹配的（内容改变，名称相应改变）。
+
+webpack可以把hash值添加到打包后的文件名中，使用方法如下：添加特殊的字符串混合体（[name]，[id] and [hash]）到输出文件名前。
+```javascript
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+module.exports = {
+    ...
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle-[hash].js"                //添加hash至到文件名中
+    },
+    ...
+};
+```
+如此一来，用户就会有合理的缓存了。<br/>
+![添加hash值到文件名中](./src/img/webpack07.png)<br/>
 
 #### 7.3 去除build文件中的残余文件
+在添加了hash值到文件名中之后，会导致改变文件内容后重新打包时，因文件名不同而内容越来越多，因此这里还要介绍另一款好用的插件clean-webpack-plugin。
+* 安装
+```javascript
+npm install --save-dev clean-webpack-plugin
+```
 
+* 使用
 
+引入clean-webpack-plugin插件后，在配置文件的plugins中作相应的配置即可：
+```javascript
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
-
-
-
-
-
-
+module.exports = {
+    ...
+    plugins: [
+        ...                                     //其他插件
+        new CleanWebpackPlugin('build/*.*', {
+          root: __dirname,
+          verbose: true,
+          dry: false
+        })
+    ]
+    ...
+};
+```
+关于clean-webpack-plugin插件的更多信息请参见[此处](https://github.com/johnagan/clean-webpack-plugin)。
 
