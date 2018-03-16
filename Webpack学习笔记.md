@@ -759,7 +759,38 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin  = require('html-webpack-plugin');
 
 module.exports = {
-    ...                             //同6.2小节配置参数
+    entry: __dirname + "/app/main.js",          //入口文件
+    output: {
+        path: __dirname + "/build",
+        filename: "bundle.js"
+    },
+    devtool: 'eval-source-map',
+    devServer: {
+        contentBase: "./public",                //本地服务器加载的页面所在目录
+        historyApiFallback: true,               //不跳转
+        inline: true,
+        hot: true                               //热加载
+    },
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: { loader: "babel-loader" },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "style-loader" },
+                    {
+                        loader: "css-loader",
+                        options: { modules: true }
+                    },
+                    { loader: "postcss-loader" }
+                ]
+            }
+        ]
+    },
     plugins: [
         new webpack.BannerPlugin('版权所有，翻版必究'),
         new HtmlWebpackPlugin({ template: __dirname + '/app/index.tmpl.html' }),        //new一个插件的实例并传入相关参数
