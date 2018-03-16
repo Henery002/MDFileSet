@@ -1,7 +1,7 @@
 ## Webpack学习笔记
-> author    ：Henery(henery_002@163.com)<br/>
-> time      ：2018/03/12<br/>
-> reference ：
+> Author    ：Henery(henery_002@163.com)<br/>
+> Time      ：2018/03/12<br/>
+> Reference ：
 
 > 转载请注明出处。
 <br/>
@@ -14,7 +14,6 @@
 5. [模块](#5-模块)
 6. [插件](#6-插件)
 7. [产品阶段的构建](#7-产品阶段的构建)
-8.
 
 
 <br/>
@@ -383,7 +382,7 @@ render(
 
 > 注：webpack会自动调用 .babelrc 里的babel配置项。
 
-```
+```javascript
 module.exports = {
     entry: __dirname + "/app/main.js",          //入口文件
     output: {
@@ -420,17 +419,401 @@ module.exports = {
 <br/>
 
 ### 5. 模块
-
-
+Webpack有一个优点，它把所有文件都当做模块处理，js代码、css、fonts以及图片等等资源通过合适的loader都可以被处理。
 
 #### 5.1 css
+webpack提供两个工具处理样式表 css-loader 和 style-loader ，二者处理的任务不同。
+
+- css-loader 能够使我们用类似 @import 和 url(...) 的方法实现 require() 的功能
+- style-loader 将所有计算后的样式加入页面中
+
+二者组合使用能够把样式表嵌入到webpack打包后的js文件中。
+
+继续上例，安装使用这两个工具：
+```javascript
+// 安装
+npm install --save-dev style-loader css-loader
+```
+```javascript
+// 使用
+module.exports = {
+    ...
+    module: {
+        rules: [
+            {
+                test: /{\.jsx|\.js}$/,
+                use: { loader: "babel-loader" },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "style-loader" },         //这里对同一个文件引入多个loader
+                    { loader: "css-loader" }
+                ]
+            }
+        ]
+    },
+    ...
+};
+```
+> 注：请注意这里对同一个文件引入多个loader的方法。
+
+接下来在app文件夹下创建一个名为 main.css 的文件，对页面做一些样式设置：
+```css
+/* main.css */
+html {
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul {
+  margin: 0;
+  padding: 0;
+}
+```
+在该例中用到的webpack只有单一入口，其他的模块需要通过import、require、url等与入口文件建立关联。
+
+为了能让webpack找到 main.css 文件，将其导入到 main.js 中：
+```javascript
+// main.js
+import React from 'react';
+import {render} from 'react-dom';
+import Greeter from './Greeter';
+
+import './main.css';                //使用require导入main.css文件
+
+render(
+    <Greeter />,
+    document.getElementById('root')
+);
+
+```
+> 注：通常情况下，css和js会被打包到同一个文件中，并不会打包为一个单独的css文件。不过通过合适的配置，webpack同样也可以把css打包为单独的文件。
+
+上述案例说明了webpack是如何把css当做模块看待的。下面继续来看一个更加真实的css模块实践。
 
 #### 5.2 CSS module
+近几年，javascript借助于一些新的语言特性、更好的工具以及更好的实践方法（如模块化）发展迅速，模块化使得开发者将复杂的代码转化为小的、干净的、依赖声明明确的单元，配合优化工具，依赖管理和加载管理可以自动完成。
+
+相较而言，css的发展则显得慢一些，大多样式表却依旧巨大而且充满了全局类名，维护和修改都非常困难。
+
+css module技术意在将js的模块化思想带入css中来。通过css模块，所有的类名、动画名都默认只作用于当前模块。webpack对css模块化提供了非常好的支持，只需要在css loader中进行简单配置即可，然后就可以直接把css类名引入到组件代码中。这样做有效避免了全局污染。
+
+代码如下：
+
+```javascript
+module.exports = {
+    ...
+    module: {
+        rules: [
+            {
+                test: /{\.jsx|\.js}$/,
+                use: { loader: "babel-loader" },
+                exclude: "node_modules"
+             },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,              // 指定启用 css modules
+                            localIndentName: '[name]__[local]--[hash:base64:5]'         //指定css的类名格式
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    ...
+};
+```
+现在我们在app文件夹下创建一个 Greeter.css 文件进行测试：
+```css
+/* Greeter.css */
+.root{
+    background-color: #eee;
+    padding: 10px;
+    border: 3px solid #ccc;
+}
+```
+然后将类名 .root 导入到 Greeter.js 中：
+```javascript
+import React,{Component} from 'react';
+import config from './config.json';
+import styles from './Greeter.css';             //导入css文件
+
+class Greeter extends Component{
+    render(){
+        return (
+            <div className={styles.root}>       //使用css module添加类名的方法
+                {config.greetText}
+            </div>
+        );
+    }
+}
+
+export default Greeter;
+
+```
+现在就可以放心使用css module添加类名的方法了，即使是相同的类名也不会造成不同组件之间的污染。
+
+更多关于css module的信息，请参见[官方文档](https://github.com/css-modules/css-modules)。
 
 #### 5.3 CSS预处理器
+像Sass、Less之类的预处理器是对原生css的拓展，它们允许开发者使用类似于variables、nesting、mixins、inheritance等css中没有的特性来写css，css预处理器可以将这些特殊类型的语句转化为浏览器可识别的常规css语句。
+
+> 注：关于[Sass/Less](https://github.com/Henery002/MDFileSet/blob/master/Less%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)详细内容，可参见我在github上的其他文章。
+
+经过上述针对webpack的剖析，我们知道只需要使用相关loader并进行对应的配置就可以使用css预处理器了。
+
+以下是常用的css处理loaders:
+- Less Loader
+- Sass Loader
+- Stylus Loader
+
+还有一个用于处理css的平台PostCSS可以实现css的更多功能，详见[官方文档](https://github.com/postcss/postcss)。
+
+举例说明如何使用PostCSS。如使用PostCSS为css代码自动添加适应不同浏览器的css前缀。
+
+首先需要安装postcss-loader和autoorefixer（自动添加前缀的插件）：
+```javascript
+npm install --save-dev postcss-loader autoprefixer
+```
+然后在webpack配置文件中添加postcss-loader，在根目录新建postcss.config.js并添加如下代码之后，重新使用 npm start 打包，如此一来，css代码就会自动添加不同前缀。
+```javascript
+// webpack.config.js
+module.exports = {
+    ...
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: { loader: "babel-loader" },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: "style-loader" },
+                    {
+                        loader: "css-loader",
+                        options: { modules: true }
+                    },
+                    { loader: "postcss-loader" }            //新加loader
+                ]
+            }
+        ]
+    },
+    ...
+}
+```
+```javascript
+// postcss.config.js
+module.exports = {
+    plugins: [ require('autoprefixer') ]
+}
+```
+到了这里，本文已经谈论了处理js的Babel和处理css的PostCSS的基本用法，它们也是两个单独的平台了，配合webpack使用可以很好的发挥其作用。
 
 <br/>
 
 ### 6. 插件（Plugins）
+插件用以拓展webpack功能，在整个架构过程中生效，执行相关任务。
 
-#### 6.1
+Loaders和Plugins是不同的工具，易被混淆。loaders是在打包构建过程中用来处理源文件（JSX、Scss、Less）的，而插件不直接操作单个文件，它直接对整个构建过程起作用。
+
+webpack有很多内置插件，也有一些第三方插件，辅以完成更多功能。
+
+#### 6.1 使用插件的方法
+插件在使用前，需要通过npm安装，然后在webpack.config.js配置文件中的plugins关键字部分添加该插件的一个实例（plugins是一个数组）。
+
+如使用为打包后的代码添加版权声明的插件：
+```javascript
+const webpack = require('webpack');
+
+module.exports = {
+    ...
+    module: {
+        rules: [
+            {
+                test: /{\.jsx|\.js}$/,
+                use: { loader: "babel-loader" },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use:[
+                    { loader: 'style-loader' },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules:true
+                        }
+                    },
+                    { loader: 'postcss-loader' }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new webpack.BannerPlugin('版权所有，翻版必究！')
+    ]
+};
+```
+打包后的bundle.js文件头部显示为：<br/>
+![版权信息插件](./src/img/webpack06.jpg)<br/>
+这就是webpack插件的基本用法。
+
+下面将推荐几款常用的插件。
+
+#### 6.2 HtmlWebpackPlugin
+* 作用
+
+根据一个简单的index.html模板生成一个自动引用打包后js文件的新index.html。该插件在每次都生成不同名称的js文件时非常有用（如添加了hash值）。
+
+* 安装：
+```javascript
+npm install --save-dev html-webpack-plugin
+```
+该插件自动完成了之前需要手动完成的事项。在正式使用之前，需要对一直以来的项目结构做一些调整：
+1. 移除public文件夹。index.html会由该插件自动生成，css文件也已通过之前的操作打包到了js中。
+2. 在app目录下创建index.tmpl.html文件模板。该模板即为常规的html文件框架。在编译过程中插件会依据此模板生成最终的html页面，自动添加所依赖的css/js/fonts等文件。
+index.tmpl.html模板：
+```html
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Webpack Sample Project</title>
+    </head>
+    <body>
+        <div id='root'>
+        </div>
+    </body>
+</html>
+```
+3. 添加webpack配置文件，方法同上。新建一个build文件夹用以存放最终的输出文件。
+```javascript
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    entry: ...
+    output: ...
+    devtool: ...
+    devServer: ...
+    module: ...             //同5.3小节配置参数
+    plugins: [
+        new webpack.BannnerPlugin('版权所有，翻版必究'),
+        new HtmlWebpackPlugin({
+            template: __dirname + '/app/index.tmpl.html'        //new一个该插件的实例并传入相关参数
+        })
+    ]
+};
+```
+再次执行npm start打包，会发现build文件下生成了bundle.js和index.html：
+```javascript
+test
+  |___app
+  |___build
+  |   |___bundle.js
+  |   |____index.html
+  |___node_modules
+  |___package.json
+```
+
+#### 6.3 Hot Module Replacement
+Hot Module Replacement(HMR)插件可以让组件代码修改后自动刷新实时预览修改后的效果。
+
+在webpack中使用HMR需要做两项配置：
+- 在webpack配置文件中添加HMR插件
+- 在Webpack Dev Server中添加 hot 参数
+
+但是在配置完这些后js模块还是不能自动热加载，还需要在js模块中执行一个webpack提供的API才能实现热加载。虽然这个API不难使用，但如果是React模块，那么使用我们之前已经熟悉的Babel可以更方便的实现热加载功能。
+
+具体实现方法为：
+- Babel和webpack是独立的工具
+- 二者可以一起工作
+- 二者都可以通过插件来拓展功能
+- HMR是一个webpack插件，可以在浏览器端自动实时刷新修改后的效果。需要对模块进行额外的配置才能使其生效。
+- Babel中的react-transform-hrm插件可以在不对React模块进行额外配置的前提下让HMR生效
+
+具体配置：
+```javascript
+const webpack = require('webpack');
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
+
+module.exports = {
+    ...                             //同6.2小节配置参数
+    plugins: [
+        new webpack.BannerPlugin('版权所有，翻版必究'),
+        new HtmlWebpackPlugin({ template: __dirname + '/app/index.tmpl.html' }),        //new一个插件的实例并传入相关参数
+        new webpack.HotModuleReplacementPlugin()            //热加载插件
+    ]
+};
+```
+安装react-tansform-hmr
+```javascript
+npm install --save-dev babel-plugin-react-transform react-transform-hmr
+```
+配置Babel
+```javascript
+// .babelrc
+{
+    "presets": ["react", "env"],
+    "env": {
+        "develoment": {
+            "plugins": [
+                [
+                    "react-transform",
+                    {
+                        "transforms": [
+                            {
+                                "transform": "react-transform-hmr",
+                                "imports": ["react"],
+                                "locals": ["module"]
+                            }
+                        ]
+                    }
+                ]
+            ]
+        }
+    }
+}
+```
+如此一来，就可以在使用React的时候实现热加载了。
+
+<br/>
+
+### 7. 产品阶段的构建
+
+#### 7.1 优化插件
+
+#### 7.2 缓存
+
+#### 7.3 去除build文件中的残余文件
+
+
+
+
+
+
+
+
+
+
