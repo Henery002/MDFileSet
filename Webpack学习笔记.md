@@ -585,7 +585,7 @@ export default Greeter;
 以下是常用的css处理loaders:
 - Less Loader
 - Sass Loader
-- Stylus Loader
+- Style Loader
 
 还有一个用于处理css的平台PostCSS可以实现css的更多功能，详见[官方文档](https://github.com/postcss/postcss)。
 
