@@ -227,6 +227,7 @@ npm install --save-dev webpack-dev-server
 以下是devserver作为webpack配置项的一些配置参数，更多配置参数请参见[官网](https://webpack.js.org/configuration/dev-server/)。
 
 | devserver的配置选项 | 功能描述 |
+| - | - |
 | contentBase | 默认webpack-dev-server会为根文件夹提供本地服务器。如果想为另一个目录下的文件提供本地服务器，应该在这里设置其所在目录（本例中设置到"public"目录） |
 | port | 设置默认监听端口。如果省略，默认为8080 |
 | inline | 设置为true，当源文件改变时会自动刷新 |
