@@ -77,7 +77,7 @@ npm install eslint-plugin-react-hooks@next --save-dev
 ```
 
 2. 配置 eslint 
-```javascript
+```json
 {
   "plugins": [
     // ...
@@ -89,6 +89,7 @@ npm install eslint-plugin-react-hooks@next --save-dev
   }
 }
 ```
+
 
 <br><br>
 ## Hooks API
@@ -104,7 +105,7 @@ Hooks API 主要分为三种：
 * **State hooks**
 
 看一个例子：
-```
+```javascript
 import { useState } from 'react';
 
 function Example() {
@@ -127,7 +128,7 @@ function Example() {
 其实这个pair的两个返回值分别对应的就是React中hooks之前的 **this.state**、**this.setState**。
 
 那么我们的组件中不可能只用到一个state和一个setState，所以，useState这个hook可以在一个函数组件中多次使用：
-```
+```javascript
 function ExampleWithManyStates() {
   // 声明多个state变量
   const [ age, setAge ] = useState(28);
@@ -140,6 +141,7 @@ function ExampleWithManyStates() {
 与以前在一个class component中只能写一个state相比，hooks就避免了组件的state结构过于臃肿，每个state能够被单独处理。另外，useState的写法可读性高，用户一眼就可以看出和state相关的两个变量，如上面例子中的[age, setAge]。
 
 
+<br><br>
 * **Effect hooks**
 
 首先了解下什么是**Side Effect**（副作用），副作用是指函数或表达式的行为依赖于外部环境：
@@ -148,7 +150,7 @@ function ExampleWithManyStates() {
 2. 函数或表达式除了返回语句之外，还与外部环境或它所调用的函数有交互行为
 
 Effect hook为函数式组件添加了执行side effects的能力。我们使用useEffect这个API来处理副作用：
-```
+```javascript
 import { useState, useEffect } from 'react';
 
 function Example() {
@@ -174,10 +176,11 @@ function Example() {
 React Hooks解决了在函数式组件中使用life-cycle的问题。useEffect Hook可以看作是React类生命周期方法中componentDidMount、componentDidUpdate和componentWillMount的组合，这个钩子函数类似于redux中的subscrib，每当React因为state或props改变重新render之后，就会触发useEffect里的回调函数。useEffect的代码既会在初始化时执行，也会在后续每次rerender时执行。
 
 
+<br><br>
 * **Custom hooks**
 
 构建自定义钩子函数可以将组件逻辑提取到可重用组件中，即在hooks中引用其它hooks。下面这个官方给出的demo演示了一个聊天程序中朋友是否处于在线状态：
-```
+```javascript
 import { useState, useEffect } from "react";
 
 // 底层 Hooks, 返回布尔值：是否在线
