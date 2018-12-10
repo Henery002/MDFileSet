@@ -38,7 +38,7 @@ React 中函数式组件是一个 pure render component，没有 state 和 compo
 
 在新的React Hook中，开发者可以创建自定义Hook（Custom Hook），用以复用一些逻辑，这些逻辑会成为一个独立的逻辑单元，不再出现在组件树中，但仍然能够响应React在渲染之间的变化。
 
-<br>
+
 - 由 js 的 class 带来的疑惑
 
 简单来说，就是js语法中关于 this 的指向以及原型链、继承这类问题常常会给新手开发者学习React带来困惑。比如，在React组件内的事件监听之前需要手动绑定this的问题。
