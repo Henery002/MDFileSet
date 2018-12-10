@@ -101,6 +101,7 @@ Hooks API 主要分为三种：
 2. **Effect hooks**：在函数式组件中使用 life-cycle 和 side effect
 3. **Custom hooks**：用来复用组件逻辑，解决了上述动机中阐述的第一个问题
 
+<br>
 
 * **State hooks**
 
@@ -259,9 +260,9 @@ FriendListItem 和 FriendListStatus 是有渲染的组件（返回了JSX），**
 <br><br>
 ## 参考文章
 
-[React中文文档 - Hooks概述](https://react.css88.com/docs/hooks-intro.html)
-[Hooks FAQ](https://react.css88.com/docs/hooks-faq.html)
-[精读《React Hooks》](https://juejin.im/post/5be8d3def265da611a476231)
-[像呼吸一样自然：React Hooks + RxJS](https://zhuanlan.zhihu.com/p/50921147?utm_source=wechat_timeline&utm_medium=social&utm_oi=27826472353792&from=timeline&isappinstalled=0)
-[对React Hooks的一些思考](https://zhuanlan.zhihu.com/p/48264713)
+1. [React中文文档 - Hooks概述](https://react.css88.com/docs/hooks-intro.html)
+2. [Hooks FAQ](https://react.css88.com/docs/hooks-faq.html)
+3. [精读《React Hooks》](https://juejin.im/post/5be8d3def265da611a476231)
+4. [像呼吸一样自然：React Hooks + RxJS](https://zhuanlan.zhihu.com/p/50921147?utm_source=wechat_timeline&utm_medium=social&utm_oi=27826472353792&from=timeline&isappinstalled=0)
+5. [对React Hooks的一些思考](https://zhuanlan.zhihu.com/p/48264713)
 
